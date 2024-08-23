@@ -2,14 +2,14 @@ package org.example.entities.validator.universitynamevalidator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.example.repositories.UniversityRepository;
+import org.example.repositories.UniversityRepo;
 
 public class UniversityNameValidator implements ConstraintValidator<ValidUniversityName,String> {
-    private final UniversityRepository universityRepository;
+    private final UniversityRepo universityRepo;
 
     // Assuming you are using Spring and injecting the repository
-    public UniversityNameValidator(UniversityRepository universityRepository) {
-        this.universityRepository = universityRepository;
+    public UniversityNameValidator(UniversityRepo universityRepo) {
+        this.universityRepo = universityRepo;
     }
 
     @Override
@@ -19,6 +19,6 @@ public class UniversityNameValidator implements ConstraintValidator<ValidUnivers
         }
 
         // Check if the university name exists in the database
-        return universityRepository.existsByName(universityName);
+        return universityRepo.existsByName(universityName);
     }
 }

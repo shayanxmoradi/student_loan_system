@@ -1,5 +1,5 @@
 package org.example.repositories;
 
-public interface UniversityRepository {
+public interface UniversityRepo {
     boolean existsByName(String universityName);
 }

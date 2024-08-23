@@ -9,13 +9,14 @@ import org.example.entities.enums.DegreeType;
 import org.example.entities.enums.UniAcceptenceType;
 import org.example.entities.enums.UniversityType;
 import org.example.entities.validator.universitynamevalidator.ValidUniversityName;
+import org.example.util.PasswordGenerator;
 import org.hibernate.validator.constraints.Length;
 
 import java.sql.Date;
 
 @Table(name = Student.TABLE_NAME)
 @Entity
-public class Student extends BaseEntity {
+public class Student extends BaseEntity<Long> {
     public static final String TABLE_NAME = "student";
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
@@ -30,6 +31,7 @@ public class Student extends BaseEntity {
     private static final String DEGREE_TYPE = "DEGREE_TYPE";
     private static final String ENROLMENT_YEAR = "ENROLMENT_YEAR";
     private static final String UNI_ACCEPTENCE_TYPE = "UNI_ACCEPTENCE_TYPE";
+    private static final String PASSWORD = "PASSWORD";
 
 
     @Column(nullable = false, name = FIRST_NAME)
@@ -81,5 +83,8 @@ public class Student extends BaseEntity {
     //todo watchout this only requires when its public uni
     @Column(nullable = false, name = UNI_ACCEPTENCE_TYPE)
     private UniAcceptenceType uniAcceptenceType;
+
+    @Column(nullable = false, name = PASSWORD)
+    private String password= PasswordGenerator.passwordGenerator();
 
 }
