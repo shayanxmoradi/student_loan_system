@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.entities.enums.DegreeType;
 import org.example.entities.enums.UniAcceptenceType;
 import org.example.entities.enums.UniversityType;
@@ -16,6 +19,11 @@ import java.sql.Date;
 
 @Table(name = Student.TABLE_NAME)
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public class Student extends BaseEntity<Long> {
     public static final String TABLE_NAME = "student";
     private static final String FIRST_NAME = "first_name";
@@ -69,10 +77,14 @@ public class Student extends BaseEntity<Long> {
     @ValidUniversityName
     private String universityName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = UNIVERSITY_TYPE)
+
+
+
+    @Column(name = "UNIVERSITY_TYPE", nullable = false)
+    @Enumerated(EnumType.STRING) // Assuming this is an enum
     private UniversityType universityType;
 
+//    @Past(message = "Year of Enrollment must be in the past.")
     @Column(nullable = false, name = ENROLMENT_YEAR)
     private int entrollmentYear;
 
@@ -82,6 +94,7 @@ public class Student extends BaseEntity<Long> {
 
     //todo watchout this only requires when its public uni
     @Column(nullable = false, name = UNI_ACCEPTENCE_TYPE)
+    @Enumerated(EnumType.STRING)
     private UniAcceptenceType uniAcceptenceType;
 
     @Column(nullable = false, name = PASSWORD)

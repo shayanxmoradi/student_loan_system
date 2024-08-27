@@ -1,11 +1,11 @@
-package org.example.services;
+package org.example.services.baseentity;
 
 import org.example.entities.BaseEntity;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface BaseEntityservice <T extends BaseEntity<ID>, ID extends Serializable> {
+public interface StudentService<T extends BaseEntity<ID>, ID extends Serializable> {
     T save(T entity);
     T update(T entity);
     boolean delete(T entity);

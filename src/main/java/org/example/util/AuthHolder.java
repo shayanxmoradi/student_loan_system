@@ -6,11 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AuthHolder {
-    public String tokenUserName = null;
+    public String tokenNationalNumber = null;
     public String tokenPassword = null;
 
     public void reset() {
-        tokenUserName = null;
+        tokenNationalNumber = null;
         tokenPassword = null;
     }
 }

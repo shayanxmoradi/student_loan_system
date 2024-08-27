@@ -3,12 +3,13 @@ package org.example.util;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.example.menu.LoginMenu;
-import org.example.menu.MainMenu;
-import org.example.menu.Menu;
-import org.example.menu.SignUpMenu;
+import org.example.menu.*;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
+import org.example.repositories.student.StudentRepo;
+import org.example.repositories.student.StudentRepoImpl;
+import org.example.services.student.StudentService;
+import org.example.services.student.StudentServiceImpl;
 
 public class ApplicationContext {
     private EntityManagerFactory emf;
@@ -21,8 +22,14 @@ public class ApplicationContext {
         Input input=new Input();
         Message message= new Message();
         MainMenu mainMenu= new MainMenu();
-        LoginMenu loginMenu= new LoginMenu();
-        SignUpMenu signUpMenu= new SignUpMenu();
+
+        StudentRepo studentRepo =new StudentRepoImpl(getEntityManager());
+        StudentService studentService = new StudentServiceImpl(studentRepo);
+        AuthHolder authHolder = new AuthHolder();
+        LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder);
+        LoginMenu loginMenu= new LoginMenu(input,message,studentService,authHolder,loggedInMenu);
+
+        SignUpMenu signUpMenu= new SignUpMenu(input,message,studentService);
         menu = new Menu(input,message,mainMenu,loginMenu,signUpMenu);
 
     }
@@ -40,9 +47,10 @@ public class ApplicationContext {
         }
         return emf;
     }
+
     public EntityManager getEntityManager() {
         if (em == null) {
-            em = emf.createEntityManager();
+            em = getEntityManagerFactory().createEntityManager();
         }
         return em;
     }

@@ -1,8 +1,7 @@
-package org.example.services;
+package org.example.services.baseentity;
 
 import org.example.entities.BaseEntity;
 import org.example.repositories.baseentity.BaseEntityRepo;
-import org.yaml.snakeyaml.events.Event;
 
 import java.io.Serializable;
 import java.util.List;
