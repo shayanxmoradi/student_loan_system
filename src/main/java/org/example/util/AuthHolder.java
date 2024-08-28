@@ -15,5 +15,9 @@ public class AuthHolder {
     public void reset() {
         tokenNationalNumber = null;
         tokenPassword = null;
+        isGraduated = false;
+        partnerNationalCode = null;
+        livesInStudentResidence=false;
+
     }
 }

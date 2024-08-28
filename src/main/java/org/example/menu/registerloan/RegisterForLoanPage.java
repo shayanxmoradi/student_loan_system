@@ -19,9 +19,8 @@ public class RegisterForLoanPage {
         TUITION_LOAN_PAGE = tuitionLoanPage;
     }
 
-    private final
 
-    void show(){
+    public void show(){
 
         boolean graduated=false;
         if (!graduated){

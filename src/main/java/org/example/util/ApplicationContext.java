@@ -4,7 +4,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.menu.*;
+import org.example.menu.loggedin.LoanRepaymentPage;
 import org.example.menu.loggedin.LoggedInMenu;
+import org.example.menu.registerloan.HousingLoanPage;
+import org.example.menu.registerloan.RegisterForLoanPage;
+import org.example.menu.registerloan.StudyLoanPage;
+import org.example.menu.registerloan.TuitionLoanPage;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.repositories.student.StudentRepo;
@@ -27,7 +32,12 @@ public class ApplicationContext {
         StudentRepo studentRepo =new StudentRepoImpl(getEntityManager());
         StudentService studentService = new StudentServiceImpl(studentRepo);
         AuthHolder authHolder = new AuthHolder();
-        LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder);
+        StudyLoanPage studyLoanPage = new StudyLoanPage();
+        HousingLoanPage housingLoanPage= new HousingLoanPage(authHolder,message,input);
+        TuitionLoanPage tuitionLoanPage=new TuitionLoanPage();
+        RegisterForLoanPage registerForLoanPage= new RegisterForLoanPage(message,input,studyLoanPage,housingLoanPage,tuitionLoanPage);
+        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage();
+        LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder,message,input,registerForLoanPage,loanRepaymentPage);
         LoginMenu loginMenu= new LoginMenu(input,message,studentService,authHolder,loggedInMenu);
 
         SignUpMenu signUpMenu= new SignUpMenu(input,message,studentService);

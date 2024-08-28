@@ -1,6 +1,6 @@
 package org.example.menu.loggedin;
 
-public class LoanRepayment {
+public class LoanRepaymentPage {
 
    void  show(){
        //available only after graduate

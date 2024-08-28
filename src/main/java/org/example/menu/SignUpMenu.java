@@ -68,7 +68,7 @@ public class SignUpMenu {
 
 
         System.out.println(MESSAGE.getInputMessage("your student number"));
-        student.setStudentNumber(Integer.valueOf(INPUT.scanner.next()));
+        student.setStudentNumber(Integer.valueOf(getValidInt()));
         //todo check here
         System.out.println(MESSAGE.getInputMessage("your university name"));
         student.setUniversityName(INPUT.scanner.next());
@@ -81,15 +81,15 @@ public class SignUpMenu {
         }
         System.out.println(uniTypeText);
 
-        int choice = INPUT.scanner.nextInt();
+        int choice = getValidInt();
         while (!(choice < UniversityType.values().length)) {
             System.out.println("chose between avialable numbers");
-            choice = INPUT.scanner.nextInt();
+            choice = getValidInt();
         }
         student.setUniversityType(UniversityType.values()[choice]);
 
         System.out.println(MESSAGE.getInputMessage("your enrollment year"));
-        student.setEntrollmentYear(INPUT.scanner.nextInt());
+        student.setEntrollmentYear(getValidInt());
 
 
         System.out.println(MESSAGE.getInputMessage("chose your degree type"));
@@ -126,13 +126,13 @@ public class SignUpMenu {
         Integer monthOfBirth;
         Integer yearOfBirth;
         System.out.println(MESSAGE.getInputMessage("year of birth"));
-        yearOfBirth = INPUT.scanner.nextInt();
+        yearOfBirth = getValidInt();
 
         System.out.println(MESSAGE.getInputMessage("month of birth"));
-        monthOfBirth = INPUT.scanner.nextInt();
+        monthOfBirth = getValidInt();
 
         System.out.println(MESSAGE.getInputMessage("day of birth"));
-        dayOfBirth = INPUT.scanner.nextInt();
+        dayOfBirth = getValidInt();
         Result birthDateValues = new Result(yearOfBirth, monthOfBirth, dayOfBirth);
         return birthDateValues;
     }
@@ -167,10 +167,10 @@ public class SignUpMenu {
         }
         System.out.println(degreeTypeText);
 
-        int choice = INPUT.scanner.nextInt();
+        int choice = getValidInt();
         while (choice < 0 || choice >= DegreeType.values().length) {
             System.out.println("Invalid choice. Please choose a valid number.");
-            choice = INPUT.scanner.nextInt();
+            choice =getValidInt();
         }
         return DegreeType.values()[choice];
     }
@@ -182,12 +182,24 @@ public class SignUpMenu {
         }
         System.out.println(uniAcceptenceTypeText);
 
-        int choice = INPUT.scanner.nextInt();
+        int choice = getValidInt();
         while (choice < 0 || choice >= UniAcceptenceType.values().length) {
             System.out.println("Invalid choice. Please choose a valid number.");
-            choice = INPUT.scanner.nextInt();
+            choice = getValidInt();
         }
         return UniAcceptenceType.values()[choice];
+    }
+
+    public  int getValidInt() {
+        while (true) {
+            System.out.print("Please enter a number: ");
+            if (INPUT.scanner.hasNextInt()) {
+                return INPUT.scanner.nextInt(); // return the valid integer
+            } else {
+                System.out.println("here you are allowed just give numbers nothing else. Please try again.");
+                INPUT.scanner.next(); // discard the invalid input
+            }
+        }
     }
 
 }

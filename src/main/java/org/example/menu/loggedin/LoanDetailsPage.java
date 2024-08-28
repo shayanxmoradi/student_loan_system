@@ -1,4 +1,4 @@
 package org.example.menu.loggedin;
 
-public class LoanDetails {
+public class LoanDetailsPage {
 }
