@@ -8,6 +8,9 @@ import lombok.Setter;
 public class AuthHolder {
     public String tokenNationalNumber = null;
     public String tokenPassword = null;
+    public boolean isGraduated = false;
+    public String partnerNationalCode = null;
+    public boolean livesInStudentResidence=false;
 
     public void reset() {
         tokenNationalNumber = null;

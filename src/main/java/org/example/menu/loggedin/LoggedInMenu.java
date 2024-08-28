@@ -1,4 +1,4 @@
-package org.example.menu;
+package org.example.menu.loggedin;
 
 import org.example.util.AuthHolder;
 

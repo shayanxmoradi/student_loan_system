@@ -11,11 +11,13 @@ import lombok.NoArgsConstructor;
 import org.example.entities.enums.DegreeType;
 import org.example.entities.enums.UniAcceptenceType;
 import org.example.entities.enums.UniversityType;
+import org.example.entities.loan.Loan;
 import org.example.entities.validator.universitynamevalidator.ValidUniversityName;
 import org.example.util.PasswordGenerator;
 import org.hibernate.validator.constraints.Length;
 
 import java.sql.Date;
+import java.util.List;
 
 @Table(name = Student.TABLE_NAME)
 @Entity
@@ -31,6 +33,7 @@ public class Student extends BaseEntity<Long> {
     private static final String FATHER_NAME = "father_name";
     private static final String MOTHER_NAME = "mother_name";
     private static final String NATIONAL_CODE = "national_code";
+    private static final String PARTNER_NATIONAL_CODE = "partner_national_code";
     private static final String PASSPORT_NUMBER = "passport_number";
     private static final String DATE_OF_BIRTH = "DATE_OF_BIRTH";
     private static final String STUDENT_NUMBER = "STUDENT_NUMBER";
@@ -99,5 +102,22 @@ public class Student extends BaseEntity<Long> {
 
     @Column(nullable = false, name = PASSWORD)
     private String password= PasswordGenerator.passwordGenerator();
+
+
+    @OneToMany(mappedBy =TABLE_NAME)
+    @Column(nullable = true)
+    private List<Card> cardList;
+
+    @OneToMany(mappedBy = TABLE_NAME)
+    private List<Loan> loanList;
+
+    private boolean married;
+
+    @Column(nullable = true, name = PARTNER_NATIONAL_CODE)
+    @Size(min = 11, max = 11, message = "The length must be exactly 11 characters.")
+    private String partnerNationalCode;
+
+    private boolean livesInStudentResidence;
+
 
 }

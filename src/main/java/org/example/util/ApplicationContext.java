@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.menu.*;
+import org.example.menu.loggedin.LoggedInMenu;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.repositories.student.StudentRepo;

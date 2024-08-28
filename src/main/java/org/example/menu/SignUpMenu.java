@@ -46,26 +46,22 @@ public class SignUpMenu {
         Integer yearOfBirth, monthOfBirth, dayOfBirth;
 
         try {
-            System.out.println(MESSAGE.getInputMessage("year of birth"));
-            yearOfBirth = INPUT.scanner.nextInt();
-
-            System.out.println(MESSAGE.getInputMessage("month of birth"));
-            monthOfBirth = INPUT.scanner.nextInt();
-
-            System.out.println(MESSAGE.getInputMessage("day of birth"));
-            dayOfBirth = INPUT.scanner.nextInt();
+            while(true){
+            Result birthDateValues = getResult();
 
             // Validate the date
-            if (isValidDate(yearOfBirth, monthOfBirth, dayOfBirth)) {
+            if (isValidDate(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth(), birthDateValues.dayOfBirth())) {
                 // Create a java.sql.Date object
                 java.util.Calendar calendar = java.util.Calendar.getInstance();
-                calendar.set(yearOfBirth, monthOfBirth - 1, dayOfBirth); // Month is 0-based
+                calendar.set(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth() - 1, birthDateValues.dayOfBirth()); // Month is 0-based
                 java.sql.Date sqlDateOfBirth = new java.sql.Date(calendar.getTimeInMillis());
 
                 student.setDateOfBirth(sqlDateOfBirth);
+                break;
             } else {
                 System.out.println("Invalid date. Please check the values entered.");
-            }
+
+            }}
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter numeric values.");
         }
@@ -102,6 +98,17 @@ public class SignUpMenu {
         System.out.println(MESSAGE.getInputMessage("chose your university acceptance type"));
         student.setUniAcceptenceType(getUniAcceptenceType());
 
+        System.out.println(MESSAGE.getInputMessage(" your partner National code enter 0 if you are single"));
+
+        if (!INPUT.scanner.next().equals("0")) {
+            student.setPartnerNationalCode(INPUT.scanner.next());
+        }
+        System.out.println(MESSAGE.getInputMessage(" do you live in Student Residence? (Y/N)"));
+        if (INPUT.scanner.next().equalsIgnoreCase("y")) {
+            student.setLivesInStudentResidence(true);
+            student.setMarried(true);
+        } else student.setLivesInStudentResidence(false);
+
 
         student.setPassword(PasswordGenerator.passwordGenerator());
 
@@ -112,6 +119,25 @@ public class SignUpMenu {
         System.out.println("your Password is: " + student.getPassword() + " (make sure keep it safe)");
 
 
+    }
+
+    private Result getResult() {
+        Integer dayOfBirth;
+        Integer monthOfBirth;
+        Integer yearOfBirth;
+        System.out.println(MESSAGE.getInputMessage("year of birth"));
+        yearOfBirth = INPUT.scanner.nextInt();
+
+        System.out.println(MESSAGE.getInputMessage("month of birth"));
+        monthOfBirth = INPUT.scanner.nextInt();
+
+        System.out.println(MESSAGE.getInputMessage("day of birth"));
+        dayOfBirth = INPUT.scanner.nextInt();
+        Result birthDateValues = new Result(yearOfBirth, monthOfBirth, dayOfBirth);
+        return birthDateValues;
+    }
+
+    private record Result(Integer yearOfBirth, Integer monthOfBirth, Integer dayOfBirth) {
     }
 
     private boolean isValidDate(int year, int month, int day) {

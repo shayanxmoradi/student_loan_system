@@ -1,6 +1,7 @@
 package org.example.menu;
 
 import org.example.entities.Student;
+import org.example.menu.loggedin.LoggedInMenu;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.services.student.StudentService;
