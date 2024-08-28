@@ -32,10 +32,10 @@ public class ApplicationContext {
         StudentRepo studentRepo =new StudentRepoImpl(getEntityManager());
         StudentService studentService = new StudentServiceImpl(studentRepo);
         AuthHolder authHolder = new AuthHolder();
-        StudyLoanPage studyLoanPage = new StudyLoanPage();
+        StudyLoanPage studyLoanPage = new StudyLoanPage(authHolder);
         HousingLoanPage housingLoanPage= new HousingLoanPage(authHolder,message,input);
         TuitionLoanPage tuitionLoanPage=new TuitionLoanPage();
-        RegisterForLoanPage registerForLoanPage= new RegisterForLoanPage(message,input,studyLoanPage,housingLoanPage,tuitionLoanPage);
+        RegisterForLoanPage registerForLoanPage= new RegisterForLoanPage(message,input,studyLoanPage,housingLoanPage,tuitionLoanPage,authHolder);
         LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage();
         LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder,message,input,registerForLoanPage,loanRepaymentPage);
         LoginMenu loginMenu= new LoginMenu(input,message,studentService,authHolder,loggedInMenu);

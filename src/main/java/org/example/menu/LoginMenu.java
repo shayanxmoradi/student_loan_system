@@ -58,5 +58,6 @@ public class LoginMenu {
         AUTH_HOLDER.livesInStudentResidence= loginedStudent.isLivesInStudentResidence();
         AUTH_HOLDER.partnerNationalCode= loginedStudent.getPartnerNationalCode();
         AUTH_HOLDER.cityType= loginedStudent.getCityType();
+        AUTH_HOLDER.degreeType= loginedStudent.getDegreeType();
     }
 }
