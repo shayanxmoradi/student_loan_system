@@ -6,26 +6,20 @@ import org.example.entities.loan.StudyLoan;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-@Deprecated
+
 public class Semester {
 
-    //  private Date date;
     private int year;
     private int semesterNumber;
 
-    @ManyToOne
-    private StudyLoan studyLoan;
 
-
-
-    public Semester(Date date) {
+    @Deprecated
+    public Semester() {
         // Convert Date to LocalDate
-        LocalDate localDate = date.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
+        LocalDate localDate = LocalDate.now();
 
         // Assign year
-        this.year= localDate.getYear();
+        this.year = localDate.getYear();
 
         // Determine semester number based on month
         int month = localDate.getMonthValue(); // January = 1, December = 12

@@ -1,25 +1,23 @@
 package org.example.menu;
 
 import org.example.entities.Student;
-import org.example.entities.University;
 import org.example.entities.enums.CityType;
 import org.example.entities.enums.DegreeType;
 import org.example.entities.enums.UniAcceptenceType;
 import org.example.entities.enums.UniversityType;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
-import org.example.services.baseentity.StudentService;
+import org.example.services.baseentity.BaseEntityService;
 import org.example.util.PasswordGenerator;
 
-import java.util.Date;
 import java.util.InputMismatchException;
 
 public class SignUpMenu {
     private final Input INPUT;
     private final Message MESSAGE;
-    private final StudentService BASEENTITYSERVICE;
+    private final BaseEntityService BASEENTITYSERVICE;
 
-    public SignUpMenu(Input input, Message message, StudentService baseentityservice) {
+    public SignUpMenu(Input input, Message message, BaseEntityService baseentityservice) {
         INPUT = input;
         MESSAGE = message;
         BASEENTITYSERVICE = baseentityservice;
@@ -116,7 +114,7 @@ public class SignUpMenu {
         BASEENTITYSERVICE.save(student);
 
         MESSAGE.getSuccessfulMessage("your account");
-        System.out.println("your Password is: " + student.getPassword() + " (make sure keep it safe)");
+        System.out.println("your user is your nationalcode "+ student.getNationalCode()+"your Password is: " + student.getPassword() + " (make sure keep it safe)");
 
 
     }

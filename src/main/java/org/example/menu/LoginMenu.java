@@ -1,6 +1,8 @@
 package org.example.menu;
 
 import org.example.entities.Student;
+import org.example.entities.enums.UniAcceptenceType;
+import org.example.entities.enums.UniversityType;
 import org.example.menu.loggedin.LoggedInMenu;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
@@ -32,21 +34,36 @@ public class LoginMenu {
         nationalCode = INPUT.scanner.next();
         System.out.println(MESSAGE.getInputMessage("Your password"));
         password = INPUT.scanner.next();
-        try {
 
-            Student loginedStudent = STUDENT_SERVICE.login(nationalCode, password);
-            if (loginedStudent != null) {
-                storeStudentDetails(nationalCode, password, loginedStudent);
 
-                LOGGED_IN_MENU.show();
-            } else {
-                System.out.println(MESSAGE.getNotFoundMessage("this student "));
-                show();
-            }
-        } catch (Exception e) {
+
+        //old code
+
+        Student loginedStudent = STUDENT_SERVICE.login(nationalCode, password);
+        if (loginedStudent != null) {
+            storeStudentDetails(nationalCode, password, loginedStudent);
+
+            LOGGED_IN_MENU.show();
+        } else {
             System.out.println(MESSAGE.getNotFoundMessage("this student "));
             show();
         }
+
+//        try {
+//
+//            Student loginedStudent = STUDENT_SERVICE.login(nationalCode, password);
+//            if (loginedStudent != null) {
+//                storeStudentDetails(nationalCode, password, loginedStudent);
+//
+//                LOGGED_IN_MENU.show();
+//            } else {
+//                System.out.println(MESSAGE.getNotFoundMessage("this student "));
+//                show();
+//            }
+//        } catch (Exception e) {
+//            System.out.println(MESSAGE.getNotFoundMessage("this student "));
+//            show();
+//        }
 
 
     }
@@ -59,5 +76,7 @@ public class LoginMenu {
         AUTH_HOLDER.partnerNationalCode= loginedStudent.getPartnerNationalCode();
         AUTH_HOLDER.cityType= loginedStudent.getCityType();
         AUTH_HOLDER.degreeType= loginedStudent.getDegreeType();
+        AUTH_HOLDER.isDailyAndPublicUniversity= loginedStudent.getUniversityType() == UniversityType.PUBLIC&& loginedStudent.getUniAcceptenceType() == UniAcceptenceType.DAILY;
+        AUTH_HOLDER.student=  loginedStudent;
     }
 }

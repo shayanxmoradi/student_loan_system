@@ -27,6 +27,7 @@ public class Card extends BaseEntity<Long> {
     String cardNummber;
 
     Date expiryDate;
+
     @Column(nullable = false, name = CVV2)
     @Size(min = 3, max = 3, message = "The length must be exactly 3 characters.")
     String cvv2;

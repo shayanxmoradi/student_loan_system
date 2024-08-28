@@ -14,6 +14,7 @@ import java.time.ZoneId;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class StudyLoan extends Loan {
     public static final String TABLE_NAME = "study_loan";
 
@@ -27,17 +28,18 @@ public class StudyLoan extends Loan {
     private int LoanYear;
     private int LoanSemster;
 
-    public StudyLoan() {
-        // Convert Date to LocalDate
-        LocalDate localDate = getLoanDate().toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
+    public void  setUpStudyLoan() {
+
+
+//        LocalDate localDate = getLoanDate().toInstant()
+//                .atZone(ZoneId.systemDefault())
+//                .toLocalDate();
 
         // Assign year
-        setLoanYear(localDate.getYear());
+        setLoanYear(LocalDate.now().getYear());
 
         // Determine semester number based on month
-        int month = localDate.getMonthValue(); // January = 1, December = 12
+        int month = LocalDate.now().getMonthValue();
         if (month >= 1 && month <= 6) {
             setLoanSemster(1); // Winter Semester
         } else {

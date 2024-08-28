@@ -16,6 +16,7 @@ import java.util.Date;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class TutationLoan extends Loan{
 
     public static final String TABLE_NAME = "tutation_loan";
@@ -31,7 +32,7 @@ public class TutationLoan extends Loan{
     private int LoanSemster;
 
 
-    public TutationLoan() {
+    public void setUpTutationLoan() {
         // Convert Date to LocalDate
         LocalDate localDate = getLoanDate().toInstant()
                 .atZone(ZoneId.systemDefault())

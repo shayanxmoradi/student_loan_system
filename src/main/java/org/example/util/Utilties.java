@@ -33,6 +33,7 @@ public class Utilties {
     }
 
     public static boolean isItValidDateToRegisterLoan() {
+//todo uncomment this
 
 //    return isFirstWeekOfOctoberOrApril();
         return true;
@@ -52,6 +53,28 @@ public class Utilties {
         return false;
     }
 
+    public static int getCurrentYear() {
+        LocalDate localDate = LocalDate.now();
+
+        // Assign year
+        return localDate.getYear();
+
+    }
+
+    public static int getCurrentSemester() {
+        LocalDate localDate = LocalDate.now();
+
+
+        // Determine semester number based on month
+        int month = localDate.getMonthValue(); // January = 1, December = 12
+        if (month >= 1 && month <= 6) {
+            return 1; // Winter Semester
+        } else {
+            return 2; // Summer Semester
+        }
+
+
+    }
 
 
 }

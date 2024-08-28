@@ -5,10 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.entities.BaseEntity;
+import org.example.entities.Card;
 import org.example.entities.Student;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 
 @Table(name = Loan.TABLE_NAME)
 @Entity
@@ -24,7 +25,7 @@ public class Loan extends BaseEntity<Long> {
     private BigDecimal amount;
 
     @Column(nullable = false)
-    private BigDecimal interestRate;
+    private double interestRate;
 
     @Column(nullable = false)
     private Date loanDate;
@@ -32,6 +33,10 @@ public class Loan extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "student_id",nullable = false)
     private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "card_id",nullable = false)
+    private Card card;
 
 
 
