@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.example.entities.enums.BankType;
 import org.example.entities.enums.UniAcceptenceType;
 
@@ -32,6 +33,7 @@ public class Card extends BaseEntity<Long> {
     @Size(min = 3, max = 3, message = "The length must be exactly 3 characters.")
     String cvv2;
 
+    @ToStringExclude
     @ManyToOne
     @JoinColumn(name = "student_id",nullable = true)
     private Student student;
@@ -41,4 +43,13 @@ public class Card extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private BankType bankType;
 
+    @Override
+    public String toString() {
+        return "Card{" +
+               "cardNummber='" + cardNummber + '\'' +
+               ", expiryDate=" + expiryDate +
+               ", cvv2='" + cvv2 + '\'' +
+               ", bankType=" + bankType +
+               '}';
+    }
 }

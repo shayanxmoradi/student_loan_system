@@ -10,12 +10,15 @@ import org.example.services.card.CardService;
 import org.example.util.AuthHolder;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class CardPage {
     private final Input INPUT;
     private final Message MESSAGE;
     private final AuthHolder AUTH_HOLDER;
     private final CardService CARD_SERVICE;
+    List<Card> userCards;
 
     public CardPage(Input INPUT, Message message, AuthHolder authHolder, CardService cardService) {
         this.INPUT = INPUT;
@@ -61,12 +64,33 @@ public class CardPage {
 
 
     private Card choseBetweenCards() {
-        return null; //todo
+       userCards = CARD_SERVICE.findUsercards(AUTH_HOLDER.student.getId());
+        IntStream.range(0, userCards.size())
+                .forEach(i -> System.out.println((i + 1) + ": " + userCards.get(i)));
+        int chosedCardNumber= getValidInt();
+
+        return userCards.get(chosedCardNumber-1); //todo
+
     }
 
 
 
-
+    public  int getValidInt() {
+        while (true) {
+            System.out.print("Please enter a number: ");
+            if (INPUT.scanner.hasNextInt()) {
+                int resulat =  INPUT.scanner.nextInt();
+                if (resulat > 0 && resulat <= userCards.size()) {
+                    return resulat;
+                }else {
+                    System.out.println("not in valid range");
+                }
+            } else {
+                System.out.println("here you are allowed just give numbers nothing else. Please try again.");
+                INPUT.scanner.next(); // discard the invalid input
+            }
+        }
+    }
 
 
 }

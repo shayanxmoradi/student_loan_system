@@ -10,7 +10,7 @@ import org.example.entities.enums.DegreeType;
 @Setter
 public class AuthHolder {
     public String tokenNationalNumber = null;
-    public String tokenStudentId = null;
+    public Long tokenStudentId = null;
     public String tokenPassword = null;
 
     public boolean isGraduated = false;

@@ -47,53 +47,56 @@ public class StudyLoanPage {
             if (wantsLoahn.equals("y")) {
                 // show owned cards
                 Card resualtcard = CARD_PAGE.show();
+                if (resualtcard != null) {
 
-                // or create new card
-                System.out.println("your chosed card " + resualtcard);
-                System.out.println("Are you sure you want to take your loan on this card? [Y/N]");
-                wantsLoahn = INPUT.scanner.next().toLowerCase();
-                if (wantsLoahn.equals("y")) {
+                    // or create new card
+                    System.out.println("your chosed card " + resualtcard);
+                    System.out.println("Are you sure you want to take your loan on this card? [Y/N]");
+                    wantsLoahn = INPUT.scanner.next().toLowerCase();
+                    if (wantsLoahn.equals("y")) {
 
-                    Student student = AUTH_HOLDER.student;
-
-
-
-                    //todo is it good idea to store hole student object??
-
-                    StudyLoan studyLoan = new StudyLoan();
-                    java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                        Student student = AUTH_HOLDER.student;
 
 
-                    studyLoan.setLoanDate(date);
-                    studyLoan.setAmount(AUTH_HOLDER.degreeType.allowedLoanAmount());
-                    studyLoan.setInterestRate(4);
-                    studyLoan.setStudent(student);
-                    studyLoan.setCard(resualtcard);
-                    studyLoan.setUpStudyLoan();
-                    studyLoan.setDegreeType(AUTH_HOLDER.degreeType);
+                        //todo is it good idea to store hole student object??
+
+                        StudyLoan studyLoan = new StudyLoan();
+                        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
 
-                    STUDY_LOAN_SERVICE.save(studyLoan);
+                        studyLoan.setLoanDate(date);
+                        studyLoan.setAmount(AUTH_HOLDER.degreeType.allowedLoanAmount());
+                        studyLoan.setInterestRate(4);
+                        studyLoan.setStudent(student);
+                        studyLoan.setCard(resualtcard);
+                        studyLoan.setUpStudyLoan();
+                        studyLoan.setDegreeType(AUTH_HOLDER.degreeType);
 
-                    System.out.println(MESSAGE.getSuccessfulMessage("taking your loan on this card "));
 
-                    System.out.println(" your loan is now on your chosen card and you are allowed to repay it after your graduate");
+                        STUDY_LOAN_SERVICE.save(studyLoan);
 
-                } else {
-                    System.out.println(" you canselled your loan process!");
+                        System.out.println(MESSAGE.getSuccessfulMessage("taking your loan on this card "));
+
+                        System.out.println(" your loan is now on your chosen card and you are allowed to repay it after your graduate");
+
+                    }
+                    else {
+                        System.out.println(" you canselled your loan process!");
+
+                    }
 
                 }
+                else {
+                    System.out.println("you didnt want to take study loan");
 
+                }
             } else {
-                System.out.println("you didnt want to take study loan");
-
+                System.out.println("you are only allowed to take study loan 1 time per Semester and you " +
+                                   "already took it one time. you can try again in next Semester");
             }
-        } else {
-            System.out.println("you are only allowed to take study loan 1 time per Semester and you " +
-                               "already took it one time. you can try again in next Semester");
+
+
         }
-
-
     }
 
 
