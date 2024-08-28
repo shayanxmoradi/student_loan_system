@@ -6,6 +6,7 @@ import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.services.student.StudentService;
 import org.example.util.AuthHolder;
+import org.example.util.Utilties;
 
 public class LoginMenu {
     private final Input INPUT;
@@ -33,11 +34,12 @@ public class LoginMenu {
         password = INPUT.scanner.next();
         try {
 
-            Student login = STUDENT_SERVICE.login(nationalCode, password);
-            if (login != null) {
-            AUTH_HOLDER.tokenNationalNumber = nationalCode;
-            AUTH_HOLDER.tokenPassword = password;
-            LOGGED_IN_MENU.show();}else    {
+            Student loginedStudent = STUDENT_SERVICE.login(nationalCode, password);
+            if (loginedStudent != null) {
+                storeStudentDetails(nationalCode, password, loginedStudent);
+
+                LOGGED_IN_MENU.show();
+            } else {
                 System.out.println(MESSAGE.getNotFoundMessage("this student "));
                 show();
             }
@@ -47,5 +49,14 @@ public class LoginMenu {
         }
 
 
+    }
+
+    private void storeStudentDetails(String nationalCode, String password, Student loginedStudent) {
+        AUTH_HOLDER.tokenNationalNumber = nationalCode;
+        AUTH_HOLDER.tokenPassword = password;
+        AUTH_HOLDER.isGraduated= Utilties.isGraduated(loginedStudent.getEntrollmentYear(), loginedStudent.getDegreeType());
+        AUTH_HOLDER.livesInStudentResidence= loginedStudent.isLivesInStudentResidence();
+        AUTH_HOLDER.partnerNationalCode= loginedStudent.getPartnerNationalCode();
+        AUTH_HOLDER.cityType= loginedStudent.getCityType();
     }
 }

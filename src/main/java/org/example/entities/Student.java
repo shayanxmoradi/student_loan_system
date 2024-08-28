@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.entities.enums.CityType;
 import org.example.entities.enums.DegreeType;
 import org.example.entities.enums.UniAcceptenceType;
 import org.example.entities.enums.UniversityType;
@@ -118,6 +119,11 @@ public class Student extends BaseEntity<Long> {
     private String partnerNationalCode;
 
     private boolean livesInStudentResidence;
+
+    private String city;
+
+    @Enumerated(EnumType.STRING)
+    private CityType cityType;
 
 
 }

@@ -7,6 +7,7 @@ public enum UniversityType {
     EXTRA_CAPACITY,
     PNU,
     HOCHSCHULE,
-    NOT_PUBLIC
+    NOT_PUBLIC,
+    PUBLIC
 
 }

@@ -2,6 +2,7 @@ package org.example.menu;
 
 import org.example.entities.Student;
 import org.example.entities.University;
+import org.example.entities.enums.CityType;
 import org.example.entities.enums.DegreeType;
 import org.example.entities.enums.UniAcceptenceType;
 import org.example.entities.enums.UniversityType;
@@ -43,25 +44,24 @@ public class SignUpMenu {
         student.setPassportNumber(INPUT.scanner.next());
 
 
-        Integer yearOfBirth, monthOfBirth, dayOfBirth;
-
         try {
-            while(true){
-            Result birthDateValues = getResult();
+            while (true) {
+                Result birthDateValues = getResult();
 
-            // Validate the date
-            if (isValidDate(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth(), birthDateValues.dayOfBirth())) {
-                // Create a java.sql.Date object
-                java.util.Calendar calendar = java.util.Calendar.getInstance();
-                calendar.set(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth() - 1, birthDateValues.dayOfBirth()); // Month is 0-based
-                java.sql.Date sqlDateOfBirth = new java.sql.Date(calendar.getTimeInMillis());
+                // Validate the date
+                if (isValidDate(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth(), birthDateValues.dayOfBirth())) {
+                    // Create a java.sql.Date object
+                    java.util.Calendar calendar = java.util.Calendar.getInstance();
+                    calendar.set(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth() - 1, birthDateValues.dayOfBirth()); // Month is 0-based
+                    java.sql.Date sqlDateOfBirth = new java.sql.Date(calendar.getTimeInMillis());
 
-                student.setDateOfBirth(sqlDateOfBirth);
-                break;
-            } else {
-                System.out.println("Invalid date. Please check the values entered.");
+                    student.setDateOfBirth(sqlDateOfBirth);
+                    break;
+                } else {
+                    System.out.println("Invalid date. Please check the values entered.");
 
-            }}
+                }
+            }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter numeric values.");
         }
@@ -110,15 +110,29 @@ public class SignUpMenu {
         } else student.setLivesInStudentResidence(false);
 
 
+        setUpCityInfos(student);
+
         student.setPassword(PasswordGenerator.passwordGenerator());
-
-
         BASEENTITYSERVICE.save(student);
 
         MESSAGE.getSuccessfulMessage("your account");
         System.out.println("your Password is: " + student.getPassword() + " (make sure keep it safe)");
 
 
+    }
+
+    private void setUpCityInfos(Student student) {
+        System.out.println(MESSAGE.getInputMessage("City you live in"));
+        //todo cityies could be stored in database
+
+        String city = INPUT.scanner.next().toLowerCase();
+        student.setCity(city);
+        switch (city) {
+            case "tehran" -> student.setCityType(CityType.CAPITAL);
+            case "gilan", "esfehan", "azarbayejan", "fars", "khozestan", "qom", "khorasan razavi", "alborz" ->
+                    student.setCityType(CityType.BIG_CITY);
+            default -> student.setCityType(CityType.OTHERS);
+        }
     }
 
     private Result getResult() {
@@ -170,7 +184,7 @@ public class SignUpMenu {
         int choice = getValidInt();
         while (choice < 0 || choice >= DegreeType.values().length) {
             System.out.println("Invalid choice. Please choose a valid number.");
-            choice =getValidInt();
+            choice = getValidInt();
         }
         return DegreeType.values()[choice];
     }
@@ -190,7 +204,7 @@ public class SignUpMenu {
         return UniAcceptenceType.values()[choice];
     }
 
-    public  int getValidInt() {
+    public int getValidInt() {
         while (true) {
             System.out.print("Please enter a number: ");
             if (INPUT.scanner.hasNextInt()) {
