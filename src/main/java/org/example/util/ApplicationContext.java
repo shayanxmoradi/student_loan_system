@@ -3,29 +3,29 @@ package org.example.util;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.example.entities.Card;
 import org.example.menu.*;
 import org.example.menu.loggedin.LoanRepaymentPage;
 import org.example.menu.loggedin.LoggedInMenu;
+import org.example.menu.loggedin.PayLoanPage;
 import org.example.menu.registerloan.*;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
-import org.example.repositories.baseentity.BaseEntityRepo;
-import org.example.repositories.baseentity.BaseEntityRepoImpl;
 import org.example.repositories.card.CardRepo;
 import org.example.repositories.card.CardRepoImpl;
 import org.example.repositories.loan.study.StudyLoanRepo;
 import org.example.repositories.loan.study.StudyLoanRepoImpl;
+import org.example.repositories.loan.tuition.TuitionLoanRepo;
+import org.example.repositories.loan.tuition.TuitionLoanRepoImpl;
 import org.example.repositories.student.StudentRepo;
 import org.example.repositories.student.StudentRepoImpl;
-import org.example.services.baseentity.BaseEntityService;
-import org.example.services.baseentity.BaseEntityServiceImp;
 import org.example.services.card.CardService;
 import org.example.services.card.CardServiceImpl;
+import org.example.services.loan.tuitionloan.TuitionLoanService;
+import org.example.services.loan.tuitionloan.TuitionLoanServiceImpl;
 import org.example.services.student.StudentService;
 import org.example.services.student.StudentServicempl;
-import org.example.services.studyloan.StudyLoanService;
-import org.example.services.studyloan.StudyLoanServiceImpl;
+import org.example.services.loan.studyloan.StudyLoanService;
+import org.example.services.loan.studyloan.StudyLoanServiceImpl;
 
 public class ApplicationContext {
     private EntityManagerFactory emf;
@@ -38,10 +38,10 @@ public class ApplicationContext {
         Input input=new Input();
         Message message= new Message();
         MainMenu mainMenu= new MainMenu();
+        AuthHolder authHolder = new AuthHolder();
 
         StudentRepo studentRepo =new StudentRepoImpl(getEntityManager());
         StudentService studentService = new StudentServicempl(studentRepo);
-        AuthHolder authHolder = new AuthHolder();
         StudyLoanRepo studyLoanRepo= new StudyLoanRepoImpl(getEntityManager());
         StudyLoanService studyLoanService= new StudyLoanServiceImpl(studyLoanRepo);
         CardRepo cardrepo= new CardRepoImpl(getEntityManager());
@@ -49,9 +49,12 @@ public class ApplicationContext {
         CardPage cardPage= new CardPage(input,message,authHolder,cardService);
         StudyLoanPage studyLoanPage = new StudyLoanPage(authHolder,input,message,studyLoanService,cardService,cardPage);
         HousingLoanPage housingLoanPage= new HousingLoanPage(authHolder,message,input);
-        TuitionLoanPage tuitionLoanPage=new TuitionLoanPage(authHolder);
+        TuitionLoanRepo tuitionLoanRepo = new TuitionLoanRepoImpl(getEntityManager());
+        TuitionLoanService tuitionLoanService= new TuitionLoanServiceImpl(tuitionLoanRepo);
+        TuitionLoanPage tuitionLoanPage=new TuitionLoanPage(authHolder,tuitionLoanService,cardPage,message,input);
         RegisterForLoanPage registerForLoanPage= new RegisterForLoanPage(message,input,studyLoanPage,housingLoanPage,tuitionLoanPage,authHolder);
-        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage();
+        PayLoanPage payLoanPage= new PayLoanPage();
+        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage(authHolder,input,message,payLoanPage);
         LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder,message,input,registerForLoanPage,loanRepaymentPage);
         LoginMenu loginMenu= new LoginMenu(input,message,studentService,authHolder,loggedInMenu);
 

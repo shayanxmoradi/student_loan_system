@@ -1,9 +1,8 @@
-package org.example.services.studyloan;
+package org.example.services.loan.studyloan;
 
 import org.example.entities.Student;
 import org.example.entities.loan.StudyLoan;
 import org.example.repositories.loan.study.StudyLoanRepo;
-import org.example.services.baseentity.BaseEntityServiceImp;
 import org.example.services.loan.LoanServiceImpl;
 
 public class StudyLoanServiceImpl extends LoanServiceImpl implements StudyLoanService {

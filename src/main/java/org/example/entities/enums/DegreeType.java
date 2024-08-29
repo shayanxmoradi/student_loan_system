@@ -44,4 +44,21 @@ public enum DegreeType {
         }
 
     }
+
+    public BigDecimal allowedTuitionLoanAmount() {
+        switch (this) {
+            case CONTINUOUS_BACHELOR, NON_CONTINUOUS_BACHELOR:
+                return BigDecimal.valueOf(1300);
+
+            case CONTINUOUS_MASTER, NON_COUNTINUOUS_MASTER, CONTINUOUS_DOCTORATE,
+                 SPECIALIST_DOCTORATE:
+                return BigDecimal.valueOf(2600);
+            case NON_CONTINUOUS_DOCTORATE:
+                return BigDecimal.valueOf(6500);
+
+            default:
+                return BigDecimal.valueOf(1300);
+        }
+
+    }
 }

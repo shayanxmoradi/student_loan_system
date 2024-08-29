@@ -2,17 +2,13 @@ package org.example.menu.registerloan;
 
 import org.example.entities.Card;
 import org.example.entities.Student;
-import org.example.entities.enums.BankType;
 import org.example.entities.loan.StudyLoan;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.services.card.CardService;
-import org.example.services.studyloan.StudyLoanService;
+import org.example.services.loan.studyloan.StudyLoanService;
 import org.example.util.AuthHolder;
 
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Calendar;
 
 public class StudyLoanPage {
@@ -78,25 +74,24 @@ public class StudyLoanPage {
                         System.out.println(MESSAGE.getSuccessfulMessage("taking your loan on this card "));
 
                         System.out.println(" your loan is now on your chosen card and you are allowed to repay it after your graduate");
+                        System.out.println();
 
-                    }
-                    else {
+                    } else {
                         System.out.println(" you canselled your loan process!");
 
                     }
 
-                }
-                else {
-                    System.out.println("you didnt want to take study loan");
+                } else {
+                    System.out.println("No valid Card, loan Process failed!");
 
                 }
-            } else {
-                System.out.println("you are only allowed to take study loan 1 time per Semester and you " +
-                                   "already took it one time. you can try again in next Semester");
-            }
-
-
+            } else System.out.println("you cansed loan process!");
+        } else {
+            System.out.println("you are only allowed to take study loan 1 time per Semester and you " +
+                               "already took it one time. you can try again in next Semester");
         }
+
+
     }
 
 

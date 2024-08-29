@@ -27,7 +27,6 @@ public class CardPage {
         CARD_SERVICE = cardService;
     }
 
-    //todo
     Card show() {
       cardWhile:  while (true) {
             System.out.println("""

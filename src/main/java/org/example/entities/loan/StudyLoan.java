@@ -30,11 +30,6 @@ public class StudyLoan extends Loan {
 
     public void  setUpStudyLoan() {
 
-
-//        LocalDate localDate = getLoanDate().toInstant()
-//                .atZone(ZoneId.systemDefault())
-//                .toLocalDate();
-
         // Assign year
         setLoanYear(LocalDate.now().getYear());
 

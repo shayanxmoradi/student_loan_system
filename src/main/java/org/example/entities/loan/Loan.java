@@ -2,6 +2,7 @@ package org.example.entities.loan;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.entities.BaseEntity;
@@ -29,6 +30,11 @@ public class Loan extends BaseEntity<Long> {
 
     @Column(nullable = false)
     private Date loanDate;
+
+//    @Column(nullable = false)
+//    private boolean isPaiedOff=false;
+//todo uncomment
+
 
     @ManyToOne
     @JoinColumn(name = "student_id",nullable = false)

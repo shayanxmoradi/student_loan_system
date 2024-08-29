@@ -1,4 +1,4 @@
-package org.example.services.studyloan;
+package org.example.services.loan.studyloan;
 
 import org.example.entities.BaseEntity;
 import org.example.entities.Student;
