@@ -31,8 +31,8 @@ public class Loan extends BaseEntity<Long> {
     @Column(nullable = false)
     private Date loanDate;
 
-//    @Column(nullable = false)
-//    private boolean isPaiedOff=false;
+    @Column(nullable = false)
+    private boolean isPaiedOff=false;
 //todo uncomment
 
 

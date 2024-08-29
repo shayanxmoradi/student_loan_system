@@ -12,6 +12,8 @@ import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.repositories.card.CardRepo;
 import org.example.repositories.card.CardRepoImpl;
+import org.example.repositories.loan.LoanRepo;
+import org.example.repositories.loan.LoanRepoImpl;
 import org.example.repositories.loan.housing.HousingLoanRepo;
 import org.example.repositories.loan.housing.HousingLoanRepoImpl;
 import org.example.repositories.loan.study.StudyLoanRepo;
@@ -22,6 +24,8 @@ import org.example.repositories.student.StudentRepo;
 import org.example.repositories.student.StudentRepoImpl;
 import org.example.services.card.CardService;
 import org.example.services.card.CardServiceImpl;
+import org.example.services.loan.LoanService;
+import org.example.services.loan.LoanServiceImpl;
 import org.example.services.loan.housing.HousingLoanService;
 import org.example.services.loan.housing.HousingLoanServiceImpl;
 import org.example.services.loan.tuitionloan.TuitionLoanService;
@@ -60,7 +64,9 @@ public class ApplicationContext {
         TuitionLoanPage tuitionLoanPage=new TuitionLoanPage(authHolder,tuitionLoanService,cardPage,message,input);
         RegisterForLoanPage registerForLoanPage= new RegisterForLoanPage(message,input,studyLoanPage,housingLoanPage,tuitionLoanPage,authHolder);
         PayLoanPage payLoanPage= new PayLoanPage();
-        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage(authHolder,input,message,payLoanPage);
+        LoanRepo loanRepo= new LoanRepoImpl(getEntityManager());
+        LoanService loanService= new LoanServiceImpl(loanRepo);
+        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage(authHolder,input,message,payLoanPage,loanService);
         LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder,message,input,registerForLoanPage,loanRepaymentPage);
         LoginMenu loginMenu= new LoginMenu(input,message,studentService,authHolder,loggedInMenu);
 

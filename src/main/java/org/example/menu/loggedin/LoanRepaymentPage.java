@@ -2,6 +2,7 @@ package org.example.menu.loggedin;
 
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
+import org.example.services.loan.LoanService;
 import org.example.util.AuthHolder;
 
 public class LoanRepaymentPage {
@@ -9,17 +10,21 @@ public class LoanRepaymentPage {
     private final Input INPUT;
     private final Message MESSAGE;
     private final PayLoanPage PAYLOAN_PAGE;
+    private final LoanService LOAN_SERVICE;
 
-    public LoanRepaymentPage(AuthHolder authholder, Input input, Message message, PayLoanPage payloanPage) {
+    public LoanRepaymentPage(AuthHolder authholder, Input input, Message message, PayLoanPage payloanPage, LoanService loanService) {
         AUTHHOLDER = authholder;
         INPUT = input;
         MESSAGE = message;
         PAYLOAN_PAGE = payloanPage;
+        LOAN_SERVICE = loanService;
     }
 
     void  show(){
        //available only after graduate
-       if (!AUTHHOLDER.isGraduated()){
+        boolean isGraduted = !AUTHHOLDER.isGraduated();
+        isGraduted=false;//todo faking
+        if (isGraduted){
            System.out.println("Loan Repayment is not available for you till you graduate");
        }else {
 
@@ -67,9 +72,11 @@ public class LoanRepaymentPage {
     }
 
     private void unpaidLoans() {
+        System.out.println(LOAN_SERVICE.getUnpaiedLoans(AUTHHOLDER.student));
     }
 
     private void paidLoans() {
+        System.out.println(LOAN_SERVICE.getPaidLoans(AUTHHOLDER.student));
 
     }
 }
