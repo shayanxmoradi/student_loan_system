@@ -98,13 +98,17 @@ public class SignUpMenu {
 
         System.out.println(MESSAGE.getInputMessage(" your partner National code enter 0 if you are single"));
 
-        if (!INPUT.scanner.next().equals("0")) {
-            student.setPartnerNationalCode(INPUT.scanner.next());
-        }
+        String partnerNationalCode = INPUT.scanner.next();
+        if (!partnerNationalCode.equals("0")) {
+            student.setPartnerNationalCode(partnerNationalCode);
+            student.setMarried(true);
+
+        }else student.setMarried(false);
+
+
         System.out.println(MESSAGE.getInputMessage(" do you live in Student Residence? (Y/N)"));
         if (INPUT.scanner.next().equalsIgnoreCase("y")) {
             student.setLivesInStudentResidence(true);
-            student.setMarried(true);
         } else student.setLivesInStudentResidence(false);
 
 

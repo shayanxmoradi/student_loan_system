@@ -64,6 +64,10 @@ public class CardPage {
 
     private Card choseBetweenCards() {
        userCards = CARD_SERVICE.findUsercards(AUTH_HOLDER.student.getId());
+       if (userCards.isEmpty()) {
+           System.out.println("You dont have any cards, try to add new card");
+           return null;
+       }
         IntStream.range(0, userCards.size())
                 .forEach(i -> System.out.println((i + 1) + ": " + userCards.get(i)));
         int chosedCardNumber= getValidInt();

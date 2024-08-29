@@ -33,4 +33,11 @@ public class StudentRepoImpl extends BaseEntityRepoImpl<Student, Long> implement
         query.setParameter("password", password);
         return query.getResultStream().findFirst().orElse(null);
     }
+
+    @Override
+    public Student findStudentByNationalCode(String nationalCode) {
+        TypedQuery<Student> query = entityManager.createQuery(
+                "SELECT u FROM Student u WHERE u.nationalCode = :nationalCode", getEntityClass());
+        query.setParameter("nationalCode", nationalCode);
+        return query.getResultStream().findFirst().orElse(null);    }
 }

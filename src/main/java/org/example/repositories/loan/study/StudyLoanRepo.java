@@ -9,4 +9,5 @@ public interface StudyLoanRepo extends LoanRepo {
     boolean registerStudyLoan(StudyLoan studyLoan);
 
     boolean canTakeLoanInThisSemsster(Student student);
+
 }
