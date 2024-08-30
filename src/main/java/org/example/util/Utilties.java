@@ -29,17 +29,7 @@ public class Utilties {
         // Compare current date with the expected graduation date
         return LocalDate.now().getYear() >= duration;
     }
-//    public static Date graudateDate(int enrollmentYear, DegreeType degreeType) {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.YEAR, enrollmentYear + degreeType.getDurationYears());
-//        calendar.set(Calendar.MONTH, Calendar.JANUARY);
-//        calendar.set(Calendar.DAY_OF_MONTH, 1);
-//        calendar.set(Calendar.HOUR_OF_DAY, 0);
-//        calendar.set(Calendar.MINUTE, 0);
-//        calendar.set(Calendar.SECOND, 0);
-//        calendar.set(Calendar.MILLISECOND, 0);
-//        return calendar.getTime();
-//    }
+
 
     public static java.sql.Date graudateDate(int enrollmentYear, DegreeType degreeType) {
         int newYear = enrollmentYear + degreeType.getDurationYears();
@@ -76,7 +66,6 @@ public class Utilties {
     public static int getCurrentYear() {
         LocalDate localDate = LocalDate.now();
 
-        // Assign year
         return localDate.getYear();
 
     }
@@ -85,8 +74,7 @@ public class Utilties {
         LocalDate localDate = LocalDate.now();
 
 
-        // Determine semester number based on month
-        int month = localDate.getMonthValue(); // January = 1, December = 12
+        int month = localDate.getMonthValue();
         if (month >= 1 && month <= 6) {
             return 1; // Winter Semester
         } else {

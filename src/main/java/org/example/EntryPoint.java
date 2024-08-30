@@ -13,6 +13,4 @@ import java.util.Date;
 public class EntryPoint {
     public static void main(String[] args) {
         ApplicationContext.getInstance().getMenu().show();
-
-//        System.out.println(Utilties.isGraduated(2021, DegreeType.NON_COUNTINUOUS_MASTER));
     }}
