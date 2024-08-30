@@ -10,6 +10,7 @@ import org.example.entities.enums.BankType;
 import org.example.entities.enums.UniAcceptenceType;
 
 import java.sql.Date;
+import java.util.Objects;
 
 @Table(name = Card.TABLE_NAME)
 @Entity
@@ -35,7 +36,7 @@ public class Card extends BaseEntity<Long> {
 
     @ToStringExclude
     @ManyToOne
-    @JoinColumn(name = "student_id",nullable = true)
+    @JoinColumn(name = "student_id", nullable = true)
     private Student student;
 
 
@@ -51,5 +52,20 @@ public class Card extends BaseEntity<Long> {
                ", cvv2='" + cvv2 + '\'' +
                ", bankType=" + bankType +
                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Card card)) return false;
+        if (!super.equals(o)) return false;
+        return cardNummber.equals(card.cardNummber) &&
+               expiryDate.toString().equals(card.expiryDate.toString()) &&
+               cvv2.equals(card.cvv2) && bankType == card.bankType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cardNummber, expiryDate, cvv2, student, bankType);
     }
 }

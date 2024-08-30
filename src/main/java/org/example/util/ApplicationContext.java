@@ -72,7 +72,7 @@ public class ApplicationContext {
         LoanService loanService= new LoanServiceImpl(loanRepo);
         InstallmentRepo installmentRepo= new InstallmentRepoImpl(getEntityManager());
         InstallmentService installmentService= new InstallmentServiceImpl(installmentRepo);
-        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage(authHolder,input,message,payLoanPage,loanService,installmentService);
+        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage(authHolder,input,message,payLoanPage,loanService,installmentService,cardService);
         LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder,message,input,registerForLoanPage,loanRepaymentPage);
         LoginMenu loginMenu= new LoginMenu(input,message,studentService,authHolder,loggedInMenu);
 

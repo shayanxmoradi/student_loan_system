@@ -1,10 +1,13 @@
 package org.example.menu.loggedin;
 
 import org.example.entities.BaseEntity;
+import org.example.entities.Card;
 import org.example.entities.loan.LoanInstallment;
+import org.example.menu.util.CardInfoCollector;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.services.baseentity.BaseEntityService;
+import org.example.services.card.CardService;
 import org.example.services.loan.LoanService;
 import org.example.services.loan.installment.InstallmentService;
 import org.example.util.AuthHolder;
@@ -18,14 +21,16 @@ public class LoanRepaymentPage {
     private final PayLoanPage PAYLOAN_PAGE;
     private final LoanService LOAN_SERVICE;
     private final InstallmentService INSTALLMENT_SERVICE;
+    private final CardService CARD_SERVICE;
 
-    public LoanRepaymentPage(AuthHolder authholder, Input input, Message message, PayLoanPage payloanPage, LoanService loanService, InstallmentService installmentService) {
+    public LoanRepaymentPage(AuthHolder authholder, Input input, Message message, PayLoanPage payloanPage, LoanService loanService, InstallmentService installmentService, CardService cardService) {
         AUTHHOLDER = authholder;
         INPUT = input;
         MESSAGE = message;
         PAYLOAN_PAGE = payloanPage;
         LOAN_SERVICE = loanService;
         INSTALLMENT_SERVICE = installmentService;
+        CARD_SERVICE = cardService;
     }
 
     void show() {
@@ -99,7 +104,36 @@ public class LoanRepaymentPage {
     }
 
     private Boolean payInstallment(LoanInstallment chosedInstallment) {
-        return true;//todo
+        Card card = new Card();
+        Card chosenCard = CardInfoCollector.collectCardInfo(card);
+        List<Card> usercards = CARD_SERVICE.findUsercards(AUTHHOLDER.student.getId());
+
+        // usercards.stream().forEach(System.out::println);
+        boolean isCardValid = usercards.stream().anyMatch(
+                card1 -> card1.getCardNummber().equals(card.getCardNummber())
+                         & card1.getCvv2().equals(card.getCvv2())
+                         & card1.getBankType() == card.getBankType()
+                         & card1.getExpiryDate().toString().equals(card.getExpiryDate().toString()));
+        //   boolean isCardValid=usercards.stream().equals(chosenCard);
+
+
+        if (isCardValid) {
+            System.out.println(" you chosed this Card : ");
+            System.out.println(chosenCard);//todo remove
+            System.out.println(" Are you sure you want to pay this installment with given card [Y/N]");
+            if (INPUT.scanner.next().toLowerCase().equals("y")) {
+                System.out.println("\n" + "-> loaninstallment sucessfully paied! <-" + "\n");
+                return true;
+            } else {
+                System.out.println(" you cansel paying process");
+                return false;
+            }
+        } else
+            System.out.println();
+        System.out.println("this card is not in your arlreadygiven cards\n" +
+                           "paying loaninstallment processes failed!");
+
+        return false;
     }
 
     private void unpaidLoans() {
