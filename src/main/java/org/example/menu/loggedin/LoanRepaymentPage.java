@@ -108,7 +108,6 @@ public class LoanRepaymentPage {
         Card chosenCard = CardInfoCollector.collectCardInfo(card);
         List<Card> usercards = CARD_SERVICE.findUsercards(AUTHHOLDER.student.getId());
 
-        // usercards.stream().forEach(System.out::println);
         boolean isCardValid = usercards.stream().anyMatch(
                 card1 -> card1.getCardNummber().equals(card.getCardNummber())
                          & card1.getCvv2().equals(card.getCvv2())
@@ -138,7 +137,7 @@ public class LoanRepaymentPage {
 
     private void unpaidLoans() {
         List<LoanInstallment> unpaiedInstallments = INSTALLMENT_SERVICE.getInstallments(AUTHHOLDER.student, false);
-
+        System.out.println("Here are some of your unpaied loans");
         for (int i = 0; i < unpaiedInstallments.size(); i++) {
             System.out.println(i + ") " + unpaiedInstallments.get(i).toString());
 
@@ -148,6 +147,7 @@ public class LoanRepaymentPage {
 
     private void paidLoans() {
         List<LoanInstallment> unpaiedInstallments = INSTALLMENT_SERVICE.getInstallments(AUTHHOLDER.student, true);
+        System.out.println("Here are some of your paid loans");
 
         for (int i = 0; i < unpaiedInstallments.size(); i++) {
             System.out.println(i + ") " + unpaiedInstallments.get(i).toString());

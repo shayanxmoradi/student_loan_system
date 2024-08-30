@@ -113,7 +113,6 @@ public class SignUpMenu {
 
 
         setUpCityInfos(student);
-
         student.setPassword(PasswordGenerator.passwordGenerator());
         BASEENTITYSERVICE.save(student);
 

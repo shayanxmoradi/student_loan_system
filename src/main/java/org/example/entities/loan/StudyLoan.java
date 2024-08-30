@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.entities.enums.DegreeType;
-import org.example.entities.locals.SemesterDeprecated;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 @Table(name = "study_loan")
 @Entity
