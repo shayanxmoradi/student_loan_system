@@ -14,7 +14,7 @@ public class InstallmentGenerator {
 
         List<LoanInstallment> loanInstallmentList = new ArrayList<>();
         BigDecimal fullLoanAmount = getFullLoanAmount(loan);
-        BigDecimal fullPriceAfterInterest = getFullPriceAfterInterest(fullLoanAmount, 4, 5);
+        BigDecimal fullPriceAfterInterest = getFullPriceAfterInterest(fullLoanAmount, 1.04, 5);
         BigDecimal installmentAmount = fullPriceAfterInterest.divide(new BigDecimal(60), 2, BigDecimal.ROUND_HALF_UP);
         Date graudateDate = authHolder.getGraduatedDate();
 
@@ -56,7 +56,12 @@ public class InstallmentGenerator {
     }
 
     public static BigDecimal getFullPriceAfterInterest(BigDecimal loanAmount, double intrestRate, int years) {
-        return loanAmount.multiply(BigDecimal.valueOf(intrestRate)).pow(years);
+        System.out.println("your Token loan Amount is : "+loanAmount);
+        System.out.println("Total interest after 5 years would be :"+BigDecimal.valueOf(intrestRate).pow(years));
+        System.out.println("in Total you should Pay :"+loanAmount.multiply(BigDecimal.valueOf(intrestRate).pow(years)));
+
+        return loanAmount.multiply(BigDecimal.valueOf(intrestRate).pow(years));
+
 
     }
 }
