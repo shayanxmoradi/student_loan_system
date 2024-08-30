@@ -44,40 +44,41 @@ public class ApplicationContext {
     private EntityManager em;
     private static ApplicationContext applicationContext;
     public static Menu menu;
+
     private ApplicationContext() {
 
 
-        Input input=new Input();
-        Message message= new Message();
-        MainMenu mainMenu= new MainMenu();
+        Input input = new Input();
+        Message message = new Message();
+        MainMenu mainMenu = new MainMenu();
         AuthHolder authHolder = new AuthHolder();
 
-        StudentRepo studentRepo =new StudentRepoImpl(getEntityManager());
+        StudentRepo studentRepo = new StudentRepoImpl(getEntityManager());
         StudentService studentService = new StudentServicempl(studentRepo);
-        StudyLoanRepo studyLoanRepo= new StudyLoanRepoImpl(getEntityManager());
-        StudyLoanService studyLoanService= new StudyLoanServiceImpl(studyLoanRepo);
-        CardRepo cardrepo= new CardRepoImpl(getEntityManager());
+        StudyLoanRepo studyLoanRepo = new StudyLoanRepoImpl(getEntityManager());
+        StudyLoanService studyLoanService = new StudyLoanServiceImpl(studyLoanRepo);
+        CardRepo cardrepo = new CardRepoImpl(getEntityManager());
         CardService cardService = new CardServiceImpl(cardrepo);
-        CardPage cardPage= new CardPage(input,message,authHolder,cardService);
-        StudyLoanPage studyLoanPage = new StudyLoanPage(authHolder,input,message,studyLoanService,cardService,cardPage);
-       HousingLoanRepo housingLoanRepo= new HousingLoanRepoImpl(getEntityManager());
-        HousingLoanService housingLoanService= new HousingLoanServiceImpl(housingLoanRepo,studentRepo);
-        HousingLoanPage housingLoanPage= new HousingLoanPage(authHolder,message,input,housingLoanService,cardService,cardPage);
+        CardPage cardPage = new CardPage(input, message, authHolder, cardService);
+        StudyLoanPage studyLoanPage = new StudyLoanPage(authHolder, input, message, studyLoanService, cardService, cardPage);
+        HousingLoanRepo housingLoanRepo = new HousingLoanRepoImpl(getEntityManager());
+        HousingLoanService housingLoanService = new HousingLoanServiceImpl(housingLoanRepo, studentRepo);
+        HousingLoanPage housingLoanPage = new HousingLoanPage(authHolder, message, input, housingLoanService, cardService, cardPage);
         TuitionLoanRepo tuitionLoanRepo = new TuitionLoanRepoImpl(getEntityManager());
-        TuitionLoanService tuitionLoanService= new TuitionLoanServiceImpl(tuitionLoanRepo);
-        TuitionLoanPage tuitionLoanPage=new TuitionLoanPage(authHolder,tuitionLoanService,cardPage,message,input);
-        RegisterForLoanPage registerForLoanPage= new RegisterForLoanPage(message,input,studyLoanPage,housingLoanPage,tuitionLoanPage,authHolder);
-        PayLoanPage payLoanPage= new PayLoanPage();
-        LoanRepo loanRepo= new LoanRepoImpl(getEntityManager());
-        LoanService loanService= new LoanServiceImpl(loanRepo);
-        InstallmentRepo installmentRepo= new InstallmentRepoImpl(getEntityManager());
-        InstallmentService installmentService= new InstallmentServiceImpl(installmentRepo);
-        LoanRepaymentPage loanRepaymentPage=new LoanRepaymentPage(authHolder,input,message,payLoanPage,loanService,installmentService,cardService);
-        LoggedInMenu loggedInMenu= new LoggedInMenu(authHolder,message,input,registerForLoanPage,loanRepaymentPage);
-        LoginMenu loginMenu= new LoginMenu(input,message,studentService,authHolder,loggedInMenu);
+        TuitionLoanService tuitionLoanService = new TuitionLoanServiceImpl(tuitionLoanRepo);
+        TuitionLoanPage tuitionLoanPage = new TuitionLoanPage(authHolder, tuitionLoanService, cardPage, message, input);
+        RegisterForLoanPage registerForLoanPage = new RegisterForLoanPage(message, input, studyLoanPage, housingLoanPage, tuitionLoanPage, authHolder);
+        PayLoanPage payLoanPage = new PayLoanPage();
+        LoanRepo loanRepo = new LoanRepoImpl(getEntityManager());
+        LoanService loanService = new LoanServiceImpl(loanRepo);
+        InstallmentRepo installmentRepo = new InstallmentRepoImpl(getEntityManager());
+        InstallmentService installmentService = new InstallmentServiceImpl(installmentRepo);
+        LoanRepaymentPage loanRepaymentPage = new LoanRepaymentPage(authHolder, input, message, payLoanPage, loanService, installmentService, cardService);
+        LoggedInMenu loggedInMenu = new LoggedInMenu(authHolder, message, input, registerForLoanPage, loanRepaymentPage);
+        LoginMenu loginMenu = new LoginMenu(input, message, studentService, authHolder, loggedInMenu);
 
-        SignUpMenu signUpMenu= new SignUpMenu(input,message,studentService);
-        menu = new Menu(input,message,mainMenu,loginMenu,signUpMenu);
+        SignUpMenu signUpMenu = new SignUpMenu(input, message, studentService);
+        menu = new Menu(input, message, mainMenu, loginMenu, signUpMenu);
 
     }
 
