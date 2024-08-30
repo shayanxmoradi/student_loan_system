@@ -51,6 +51,7 @@ public class StudyLoanPage {
                     wantsLoahn = INPUT.scanner.next().toLowerCase();
                     if (wantsLoahn.equals("y")) {
 
+
                         Student student = AUTH_HOLDER.student;
 
 
@@ -67,7 +68,8 @@ public class StudyLoanPage {
                         studyLoan.setCard(resualtcard);
                         studyLoan.setUpStudyLoan();
                         studyLoan.setDegreeType(AUTH_HOLDER.degreeType);
-
+//todo watch out
+                        studyLoan.setUpInstallments(AUTH_HOLDER);
 
                         STUDY_LOAN_SERVICE.save(studyLoan);
 

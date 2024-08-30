@@ -5,6 +5,7 @@ import jakarta.persistence.TypedQuery;
 import org.example.entities.BaseEntity;
 import org.example.entities.Student;
 import org.example.entities.loan.Loan;
+import org.example.entities.loan.LoanInstallment;
 import org.example.repositories.baseentity.BaseEntityRepoImpl;
 import org.example.repositories.student.StudentRepo;
 import org.example.util.Utilties;
@@ -45,8 +46,21 @@ public class LoanRepoImpl extends BaseEntityRepoImpl<Loan,Long> implements LoanR
     @Override
     public List<Loan> getPaiedLoans(Student student) {
         TypedQuery<Loan> query = entityManager.createQuery(
-                "SELECT l FROM Loan l WHERE l.student.id= :student_id and l.isPaiedOff= :paied_of", Loan.class);
+                "SELECT l FROM Loan l WHERE l.student.id= :student_id and l.isPaiedOff= :paied_of ", Loan.class);
         query.setParameter("student_id", student.getId());
         query.setParameter("paied_of", true);
-        return query.getResultStream().toList();    }
+        return query.getResultStream().toList();
+    }
+
+    @Override
+    public List<LoanInstallment> getUnpaiedInstallments(Student student) {
+
+//
+//        TypedQuery<Loan> query = entityManager.createQuery(
+//                "SELECT l FROM Loan l WHERE l.student.id= :student_id and l.isPaiedOff= :paied_of", Loan.class);
+//
+//        query.setParameter("student_id", student.getId());
+//        query.setParameter("paied_of", true);
+//        return query.getResultStream().toList();       }
+        return null;}
 }

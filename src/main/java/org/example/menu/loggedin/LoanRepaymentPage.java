@@ -1,9 +1,13 @@
 package org.example.menu.loggedin;
 
+import org.example.entities.loan.Loan;
+import org.example.entities.loan.LoanInstallment;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.services.loan.LoanService;
 import org.example.util.AuthHolder;
+
+import java.util.List;
 
 public class LoanRepaymentPage {
     private final AuthHolder AUTHHOLDER;
@@ -72,7 +76,21 @@ public class LoanRepaymentPage {
     }
 
     private void unpaidLoans() {
-        System.out.println(LOAN_SERVICE.getUnpaiedLoans(AUTHHOLDER.student));
+        List<Loan> unpaiedLoans = LOAN_SERVICE.getUnpaiedLoans(AUTHHOLDER.student);
+        int counter =1;
+        for (int i = 0; i < unpaiedLoans.size(); i++) {
+
+
+            List<LoanInstallment> loanInstallments = unpaiedLoans.get(i).getLoanInstallments();
+            for (int j = 0; j < loanInstallments.size()/20; j++) {
+                System.out.println(counter+") "+loanInstallments.get(j)+"\n");
+                counter++;
+
+            }
+
+            System.out.println("next loan");
+        }
+//        System.out.println(LOAN_SERVICE.getUnpaiedLoans(AUTHHOLDER.student));
     }
 
     private void paidLoans() {

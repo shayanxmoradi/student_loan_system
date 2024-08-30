@@ -8,9 +8,12 @@ import lombok.NoArgsConstructor;
 import org.example.entities.BaseEntity;
 import org.example.entities.Card;
 import org.example.entities.Student;
+import org.example.util.AuthHolder;
+import org.example.util.InstallmentGenerator;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 @Table(name = Loan.TABLE_NAME)
 @Entity
@@ -32,19 +35,27 @@ public class Loan extends BaseEntity<Long> {
     private Date loanDate;
 
     @Column(nullable = false)
-    private boolean isPaiedOff=false;
+    private boolean isPaiedOff = false;
 //todo uncomment
 
 
     @ManyToOne
-    @JoinColumn(name = "student_id",nullable = false)
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "card_id",nullable = false)
+    @JoinColumn(name = "card_id", nullable = false)
     private Card card;
 
 
+    @OneToMany(mappedBy = TABLE_NAME, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoanInstallment> loanInstallments;
 
+
+//todo watchout
+    public void setUpInstallments(AuthHolder authHolder) {
+        loanInstallments= InstallmentGenerator.generateLoanInstallmentList(this,authHolder);
+        System.out.println(loanInstallments);
+    }
 
 }

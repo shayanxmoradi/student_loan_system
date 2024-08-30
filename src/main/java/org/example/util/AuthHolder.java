@@ -6,6 +6,8 @@ import org.example.entities.Student;
 import org.example.entities.enums.CityType;
 import org.example.entities.enums.DegreeType;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 public class AuthHolder {
@@ -21,6 +23,7 @@ public class AuthHolder {
 
     public boolean isDailyAndPublicUniversity = false;
     public Student student = null;
+    public Date graduatedDate = null;
 
     public void reset() {
         tokenNationalNumber = null;
@@ -33,6 +36,7 @@ public class AuthHolder {
         degreeType = null;
         isDailyAndPublicUniversity = false;
         student = null;
+        graduatedDate = null;
 
 
     }

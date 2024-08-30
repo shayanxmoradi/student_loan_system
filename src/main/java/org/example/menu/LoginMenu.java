@@ -72,6 +72,7 @@ public class LoginMenu {
         AUTH_HOLDER.tokenNationalNumber = nationalCode;
         AUTH_HOLDER.tokenPassword = password;
         AUTH_HOLDER.isGraduated= Utilties.isGraduated(loginedStudent.getEntrollmentYear(), loginedStudent.getDegreeType());
+        AUTH_HOLDER.graduatedDate=Utilties.graudateDate(loginedStudent.getEntrollmentYear(),loginedStudent.getDegreeType());
         AUTH_HOLDER.livesInStudentResidence= loginedStudent.isLivesInStudentResidence();
         AUTH_HOLDER.partnerNationalCode= loginedStudent.getPartnerNationalCode();
         AUTH_HOLDER.cityType= loginedStudent.getCityType();

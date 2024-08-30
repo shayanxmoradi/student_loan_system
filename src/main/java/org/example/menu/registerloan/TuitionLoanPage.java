@@ -72,6 +72,8 @@ public class TuitionLoanPage {
                             tuitionLaon.setCard(resualtcard);
                             tuitionLaon.setUpTutationLoan();
                             tuitionLaon.setDegreeType(degreeType);
+                            tuitionLaon.setUpInstallments(AUTH_HOLDER);
+
 
 
                             TUITION_LOAN_SERVICE.save(tuitionLaon);

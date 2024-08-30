@@ -2,6 +2,7 @@ package org.example.services.loan;
 
 import org.example.entities.Student;
 import org.example.entities.loan.Loan;
+import org.example.entities.loan.LoanInstallment;
 import org.example.repositories.loan.LoanRepo;
 import org.example.services.baseentity.BaseEntityServiceImp;
 
@@ -22,6 +23,11 @@ public class LoanServiceImpl extends BaseEntityServiceImp<Loan,Long, LoanRepo> i
     @Override
     public List<Loan> getUnpaiedLoans(Student student) {
         return loanRepo.getUnPaiedLoans(student);
+    }
+
+    @Override
+    public List<LoanInstallment> getUnpaiedInstallments(Student student) {
+        return loanRepo.getUnpaiedInstallments(student);
     }
 
     @Override

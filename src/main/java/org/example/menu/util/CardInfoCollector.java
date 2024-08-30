@@ -100,6 +100,7 @@ public class CardInfoCollector {
         }
         return BankType.values()[choice];
     }
+
     public static int getValidInt() {
         while (true) {
             System.out.print("Please enter a number: ");

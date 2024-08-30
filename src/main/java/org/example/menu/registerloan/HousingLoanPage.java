@@ -72,6 +72,7 @@ public class HousingLoanPage {
                                 housingLoan.setStudent(student);
                                 housingLoan.setCard(resualtcard);
                                 housingLoan.setCityType(AUTH_HOLDER.cityType);
+                                housingLoan.setUpInstallments(AUTH_HOLDER);
 
                                 housingLoan.setPartnerStudent(HOUSINGLOAN_SERVICE.partnerStudetnt(AUTH_HOLDER.student));
 

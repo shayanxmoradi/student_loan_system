@@ -21,6 +21,7 @@ public class StudyLoan extends Loan {
     @Enumerated(EnumType.STRING)
     private DegreeType degreeType;
 
+
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "semester_id")
 //    private SemesterDeprecated semesterDeprecated;

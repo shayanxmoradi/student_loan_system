@@ -5,6 +5,7 @@ import org.example.entities.enums.DegreeType;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Utilties {
@@ -12,15 +13,12 @@ public class Utilties {
 
     @Deprecated
     public static boolean isGraduated(Date enrollmentDate, DegreeType degreeType) {
-        // Convert Date to LocalDate
         LocalDate enrollmentLocalDate = enrollmentDate.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
 
-        // Add the duration of the degree to the enrollment date
         LocalDate expectedGraduationDate = enrollmentLocalDate.plusYears(degreeType.getDurationYears());
 
-        // Compare current date with the expected graduation date
         return LocalDate.now().isAfter(expectedGraduationDate);
     }
 
@@ -31,6 +29,28 @@ public class Utilties {
         // Compare current date with the expected graduation date
         return LocalDate.now().getYear() >= duration;
     }
+//    public static Date graudateDate(int enrollmentYear, DegreeType degreeType) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, enrollmentYear + degreeType.getDurationYears());
+//        calendar.set(Calendar.MONTH, Calendar.JANUARY);
+//        calendar.set(Calendar.DAY_OF_MONTH, 1);
+//        calendar.set(Calendar.HOUR_OF_DAY, 0);
+//        calendar.set(Calendar.MINUTE, 0);
+//        calendar.set(Calendar.SECOND, 0);
+//        calendar.set(Calendar.MILLISECOND, 0);
+//        return calendar.getTime();
+//    }
+
+    public static java.sql.Date graudateDate(int enrollmentYear, DegreeType degreeType) {
+        int newYear = enrollmentYear + degreeType.getDurationYears();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(newYear, Calendar.JANUARY, 1); // Month is 0-based (January is 0)
+
+        // Return the SQL Date
+        return new java.sql.Date(calendar.getTimeInMillis());
+    }
+
 
     public static boolean isItValidDateToRegisterLoan() {
 //todo uncomment this
