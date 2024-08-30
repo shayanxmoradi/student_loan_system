@@ -25,10 +25,7 @@ public class LoanServiceImpl extends BaseEntityServiceImp<Loan,Long, LoanRepo> i
         return loanRepo.getUnPaiedLoans(student);
     }
 
-    @Override
-    public List<LoanInstallment> getUnpaiedInstallments(Student student) {
-        return loanRepo.getUnpaiedInstallments(student);
-    }
+
 
     @Override
     public List<Loan> getPaidLoans(Student student) {

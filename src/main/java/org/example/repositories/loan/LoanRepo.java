@@ -1,6 +1,5 @@
 package org.example.repositories.loan;
 
-import org.example.entities.BaseEntity;
 import org.example.entities.Student;
 import org.example.entities.loan.Loan;
 import org.example.entities.loan.LoanInstallment;
@@ -15,5 +14,4 @@ public interface LoanRepo extends BaseEntityRepo<Loan,Long> {
 
     List<Loan> getPaiedLoans(Student student);
 
-    List<LoanInstallment> getUnpaiedInstallments(Student student);
 }
