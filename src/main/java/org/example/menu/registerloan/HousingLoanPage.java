@@ -3,7 +3,6 @@ package org.example.menu.registerloan;
 import org.example.entities.Card;
 import org.example.entities.Student;
 import org.example.entities.loan.HousingLoan;
-import org.example.entities.loan.StudyLoan;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.services.card.CardService;

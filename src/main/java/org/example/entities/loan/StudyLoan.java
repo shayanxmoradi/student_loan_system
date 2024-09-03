@@ -20,9 +20,6 @@ public class StudyLoan extends Loan {
     private DegreeType degreeType;
 
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "semester_id")
-//    private SemesterDeprecated semesterDeprecated;
 
     private int LoanYear;
     private int LoanSemster;

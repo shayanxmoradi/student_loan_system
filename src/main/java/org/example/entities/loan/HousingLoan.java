@@ -20,6 +20,6 @@ public class HousingLoan extends Loan {
     private CityType cityType;
 
     @OneToOne
-    Student partnerStudent;//todo partner is not student
+    Student partnerStudent;
 
 }

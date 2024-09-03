@@ -36,9 +36,4 @@ public class StudyLoanRepoImpl extends LoanRepoImpl implements StudyLoanRepo {
         return loanList.isEmpty();
     }
 
-//    @Override
-//    public Class<Loan> getEntityClass() {
-//        return StudyLoan.class;
-//    }
-    //todo wtf is this
 }

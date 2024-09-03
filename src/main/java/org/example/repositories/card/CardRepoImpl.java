@@ -24,7 +24,6 @@ public class CardRepoImpl extends BaseEntityRepoImpl<Card,Long> implements CardR
 
         TypedQuery<Card> query = entityManager.createQuery(
                 "SELECT c FROM Card c WHERE c.student.id= :student_id", Card.class);
-        //todo finding paramter here ??
         query.setParameter("student_id", userId);
 
         return query.getResultStream().toList();

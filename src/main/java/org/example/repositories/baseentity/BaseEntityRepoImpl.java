@@ -27,7 +27,6 @@ public abstract class BaseEntityRepoImpl<T extends BaseEntity<ID>, ID extends Se
 
     @Override
     public T update(T entity) {
-        //todo problem
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
