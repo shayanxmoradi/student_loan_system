@@ -13,4 +13,5 @@ import java.util.Date;
 public class EntryPoint {
     public static void main(String[] args) {
         ApplicationContext.getInstance().getMenu().show();
-    }}
+    }
+}

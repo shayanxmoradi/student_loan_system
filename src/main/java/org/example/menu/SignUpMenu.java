@@ -1,9 +1,7 @@
 package org.example.menu;
 
 import org.example.entities.Student;
-import org.example.entities.enums.CityType;
-import org.example.entities.enums.DegreeType;
-import org.example.entities.enums.UniAcceptenceType;
+
 import org.example.entities.enums.UniversityType;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
@@ -37,14 +35,13 @@ public class SignUpMenu {
 
         student.setLastName(validator.getStringWithGivenSize(4,20));
 
-        System.out.println(MESSAGE.getInputMessage("your fathername"));
+        System.out.println(MESSAGE.getInputMessage("your father name"));
         student.setFatherName(validator.getStringWithGivenSize(4,20));
-        System.out.println(MESSAGE.getInputMessage("your mothername"));
+        System.out.println(MESSAGE.getInputMessage("your mother name"));
         student.setMotherName(validator.getStringWithGivenSize(4,20));
 
-
-        String nationalCode = validator.getVAlidNationalCode();
-        student.setNationalCode(nationalCode);
+        System.out.println(MESSAGE.getInputMessage("your national code"));
+        student.setNationalCode(validator.getVAlidNationalCode());
 
 
         System.out.println(MESSAGE.getInputMessage("your passport number"));
@@ -55,9 +52,7 @@ public class SignUpMenu {
             while (true) {
                 SignUpPageValidator.Result birthDateValues = validator.getResult();
 
-                // Validate the date
                 if (validator.isValidDate(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth(), birthDateValues.dayOfBirth())) {
-                    // Create a java.sql.Date object
                     java.util.Calendar calendar = java.util.Calendar.getInstance();
                     calendar.set(birthDateValues.yearOfBirth(), birthDateValues.monthOfBirth() - 1, birthDateValues.dayOfBirth()); // Month is 0-based
                     java.sql.Date sqlDateOfBirth = new java.sql.Date(calendar.getTimeInMillis());
@@ -107,7 +102,8 @@ public class SignUpMenu {
 
 
         System.out.println("Are you married? [Y/N]");
-        if (INPUT.scanner.nextLine().toLowerCase().equals("y")) {
+        String isMarried = INPUT.scanner.next().toLowerCase();
+        if (isMarried.equals("y")) {
             System.out.println(MESSAGE.getInputMessage(" your partner National code "));
 
             student.setPartnerNationalCode(validator.getVAlidNationalCode());
@@ -121,7 +117,8 @@ public class SignUpMenu {
 
 
         System.out.println(MESSAGE.getInputMessage(" do you live in Student Residence? (Y/N)"));
-        if (INPUT.scanner.next().equalsIgnoreCase("y")) {
+        boolean livesInresidence = INPUT.scanner.next().equalsIgnoreCase("y");
+        if (livesInresidence) {
             student.setLivesInStudentResidence(true);
         } else student.setLivesInStudentResidence(false);
 

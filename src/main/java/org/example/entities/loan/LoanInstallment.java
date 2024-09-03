@@ -32,5 +32,4 @@ public class LoanInstallment extends BaseEntity<Long> {
 
     private Boolean isPaiedOff;
 
-
 }

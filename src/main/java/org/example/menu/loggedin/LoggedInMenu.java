@@ -41,9 +41,7 @@ public class LoggedInMenu {
                 }
                 default -> System.out.println(MESSAGE.getInvalidInputMessage());
 
-
             }
-
 
         }
     }

@@ -12,5 +12,5 @@ public class University extends BaseEntity<Long> {
     private static final String UNI_NAME = "uni_name";
     @Column(nullable = false, name = UNI_NAME)
     @Size(min = 4, max = 100, message = "minimum  length is 4 and max is 100")
-    private String firstName;
+    private String UniName;
 }

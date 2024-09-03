@@ -22,6 +22,6 @@ public class TuitionLoanRepoImpl extends LoanRepoImpl implements TuitionLoanRepo
         query.setParameter("loan_semester", Utilties.getCurrentSemester());
         query.setParameter("loan_year", Utilties.getCurrentYear());
         List<Loan> loanList = query.getResultStream().toList();
-
-        return loanList.isEmpty();    }
+        return loanList.isEmpty();
+    }
 }

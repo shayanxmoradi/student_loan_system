@@ -41,5 +41,4 @@ public class TuitionLaon extends Loan{
         }
     }
 
-
 }

@@ -35,7 +35,6 @@ public class SignUpPageValidator {
     }
 
     public String getVAlidNationalCode() {
-        System.out.println(MESSAGE.getInputMessage("your national code"));
 
         String validLenghtInput = getStringWithGivenSize(11, 11);
 
@@ -93,23 +92,20 @@ public class SignUpPageValidator {
     }
 
     public boolean isValidDate(int year, int month, int day) {
-        // Basic validation for month and day
+        if (year < 1920 || year > 2006) return false;
         if (month < 1 || month > 12) return false;
         if (day < 1 || day > 31) return false;
 
-        // Handle months with different number of days
         if (month == 2) {
-            // Check for leap year
             boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
             return day <= (isLeapYear ? 29 : 28);
         }
 
-        // Handle months with 30 days
         if (month == 4 || month == 6 || month == 9 || month == 11) {
             return day <= 30;
         }
 
-        return true; // For months with 31 days
+        return true;
     }
 
     public DegreeType getDegreeType() {
@@ -149,7 +145,7 @@ public class SignUpPageValidator {
                 return INPUT.scanner.nextInt(); // return the valid integer
             } else {
                 System.out.println("here you are allowed just give numbers nothing else. Please try again.");
-                INPUT.scanner.next(); // discard the invalid input
+                INPUT.scanner.next();
             }
         }
     }

@@ -20,7 +20,6 @@ public abstract class BaseEntityRepoImpl<T extends BaseEntity<ID>, ID extends Se
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
-        //   System.out.println("Generated ID: " + entity.getId());
         return entity;
 
     }

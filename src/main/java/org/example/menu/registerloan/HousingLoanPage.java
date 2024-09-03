@@ -61,22 +61,7 @@ public class HousingLoanPage {
 
                                 //todo is it good idea to store hole student object??
 
-                                HousingLoan housingLoan = new HousingLoan();
-                                java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-
-
-                                housingLoan.setLoanDate(date);
-                                housingLoan.setAmount(AUTH_HOLDER.cityType.allowedHousingLoanAmount());
-                                housingLoan.setInterestRate(4);
-                                housingLoan.setStudent(student);
-                                housingLoan.setCard(resualtcard);
-                                housingLoan.setCityType(AUTH_HOLDER.cityType);
-                                housingLoan.setUpInstallments(AUTH_HOLDER);
-
-                                housingLoan.setPartnerStudent(HOUSINGLOAN_SERVICE.partnerStudetnt(AUTH_HOLDER.student));
-
-
-                                HOUSINGLOAN_SERVICE.save(housingLoan);
+                                setupLoan(student, resualtcard);
 
                                 System.out.println(MESSAGE.getSuccessfulMessage("taking your loan on this card "));
 
@@ -112,5 +97,24 @@ public class HousingLoanPage {
         } else {
             System.out.println("you are not Allowed for Housing loan cause you are not married!");
         }
+    }
+
+    private void setupLoan(Student student, Card resualtcard) {
+        HousingLoan housingLoan = new HousingLoan();
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+
+        housingLoan.setLoanDate(date);
+        housingLoan.setAmount(AUTH_HOLDER.cityType.allowedHousingLoanAmount());
+        housingLoan.setInterestRate(4);
+        housingLoan.setStudent(student);
+        housingLoan.setCard(resualtcard);
+        housingLoan.setCityType(AUTH_HOLDER.cityType);
+        housingLoan.setUpInstallments(AUTH_HOLDER);
+
+        housingLoan.setPartnerStudent(HOUSINGLOAN_SERVICE.partnerStudetnt(AUTH_HOLDER.student));
+
+
+        HOUSINGLOAN_SERVICE.save(housingLoan);
     }
 }

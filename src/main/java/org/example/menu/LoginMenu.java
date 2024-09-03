@@ -37,8 +37,6 @@ public class LoginMenu {
 
 
 
-        //old code
-
         Student loginedStudent = STUDENT_SERVICE.login(nationalCode, password);
         if (loginedStudent != null) {
             storeStudentDetails(nationalCode, password, loginedStudent);
@@ -49,21 +47,6 @@ public class LoginMenu {
             show();
         }
 
-//        try {
-//
-//            Student loginedStudent = STUDENT_SERVICE.login(nationalCode, password);
-//            if (loginedStudent != null) {
-//                storeStudentDetails(nationalCode, password, loginedStudent);
-//
-//                LOGGED_IN_MENU.show();
-//            } else {
-//                System.out.println(MESSAGE.getNotFoundMessage("this student "));
-//                show();
-//            }
-//        } catch (Exception e) {
-//            System.out.println(MESSAGE.getNotFoundMessage("this student "));
-//            show();
-//        }
 
 
     }

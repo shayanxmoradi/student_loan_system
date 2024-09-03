@@ -3,13 +3,11 @@ package org.example.repositories.card;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.example.entities.Card;
-import org.example.entities.loan.Loan;
 import org.example.repositories.baseentity.BaseEntityRepoImpl;
-import org.example.util.Utilties;
 
 import java.util.List;
 
-public class CardRepoImpl extends BaseEntityRepoImpl<Card,Long> implements CardRepo {
+public class CardRepoImpl extends BaseEntityRepoImpl<Card, Long> implements CardRepo {
     public CardRepoImpl(EntityManager entityManager) {
         super(entityManager);
     }
