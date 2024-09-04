@@ -64,14 +64,6 @@ public class LoanRepaymentPage {
 
             }
 
-//            //paid loans
-//            paidLoans();
-//
-//            //unpaid loans
-//            unpaidLoans();
-//
-//            //pay loans
-//            payLoans();
         }
     }
 
