@@ -61,7 +61,7 @@ public class Student extends BaseEntity<Long> {
     @Size(min = 4, max = 100, message = "minimum  length is 4 and max is 100")
     private String motherName;
 
-    @Column(nullable = false, name = NATIONAL_CODE)
+    @Column(nullable = false, name = NATIONAL_CODE,unique = true)
     @Size(min = 11, max = 11, message = "The length must be exactly 11 characters.")
     private String nationalCode;
 
@@ -88,7 +88,7 @@ public class Student extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING) // Assuming this is an enum
     private UniversityType universityType;
 
-//    @Past(message = "Year of Enrollment must be in the past.")
+  @Past(message = "Year of Enrollment must be in the past.")
     @Column(nullable = false, name = ENROLMENT_YEAR)
     private int entrollmentYear;
 
