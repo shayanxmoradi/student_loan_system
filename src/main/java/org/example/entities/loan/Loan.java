@@ -36,7 +36,6 @@ public class Loan extends BaseEntity<Long> {
 
     @Column(nullable = false)
     private boolean isPaiedOff = false;
-//todo uncomment
 
 
     @ManyToOne

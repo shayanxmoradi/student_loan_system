@@ -54,24 +54,7 @@ public class StudyLoanPage {
 
                         Student student = AUTH_HOLDER.student;
 
-
-                        //todo is it good idea to store hole student object??
-
-                        StudyLoan studyLoan = new StudyLoan();
-                        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-
-
-                        studyLoan.setLoanDate(date);
-                        studyLoan.setAmount(AUTH_HOLDER.degreeType.allowedLoanAmount());
-                        studyLoan.setInterestRate(4);
-                        studyLoan.setStudent(student);
-                        studyLoan.setCard(resualtcard);
-                        studyLoan.setUpStudyLoan();
-                        studyLoan.setDegreeType(AUTH_HOLDER.degreeType);
-//todo watch out
-                        studyLoan.setUpInstallments(AUTH_HOLDER);
-
-                        STUDY_LOAN_SERVICE.save(studyLoan);
+                        setupLoan(student, resualtcard);
 
                         System.out.println(MESSAGE.getSuccessfulMessage("taking your loan on this card "));
 
@@ -79,7 +62,7 @@ public class StudyLoanPage {
                         System.out.println();
 
                     } else {
-                        System.out.println(" you canselled your loan process!");
+                        System.out.println(" you cancelled your loan process!");
 
                     }
 
@@ -87,13 +70,31 @@ public class StudyLoanPage {
                     System.out.println("No valid Card, loan Process failed!");
 
                 }
-            } else System.out.println("you cansed loan process!");
+            } else System.out.println("you cancelled loan process!");
         } else {
             System.out.println("you are only allowed to take study loan 1 time per Semester and you " +
                                "already took it one time. you can try again in next Semester");
         }
 
 
+    }
+
+    private void setupLoan(Student student, Card resualtcard) {
+        StudyLoan studyLoan = new StudyLoan();
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+
+        studyLoan.setLoanDate(date);
+        studyLoan.setAmount(AUTH_HOLDER.degreeType.allowedLoanAmount());
+        studyLoan.setInterestRate(4);
+        studyLoan.setStudent(student);
+        studyLoan.setCard(resualtcard);
+        studyLoan.setUpStudyLoan();
+        studyLoan.setDegreeType(AUTH_HOLDER.degreeType);
+//todo watch out
+        studyLoan.setUpInstallments(AUTH_HOLDER);
+
+        STUDY_LOAN_SERVICE.save(studyLoan);
     }
 
 

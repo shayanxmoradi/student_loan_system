@@ -6,7 +6,7 @@ import org.example.entities.loan.StudyLoan;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-
+@Deprecated
 public class Semester {
 
     private int year;

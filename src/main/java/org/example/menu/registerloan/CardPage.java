@@ -72,7 +72,7 @@ public class CardPage {
                 .forEach(i -> System.out.println((i + 1) + ": " + userCards.get(i)));
         int chosedCardNumber= getValidInt();
 
-        return userCards.get(chosedCardNumber-1); //todo
+        return userCards.get(chosedCardNumber-1);
 
     }
 
@@ -94,6 +94,5 @@ public class CardPage {
             }
         }
     }
-
 
 }

@@ -12,7 +12,7 @@ import java.sql.Date;
 @Setter
 public class AuthHolder {
     public String tokenNationalNumber = null;
-    public Long tokenStudentId = null;
+    public Long tokenStudentId ;
     public String tokenPassword = null;
 
     public boolean isGraduated = false;

@@ -47,7 +47,6 @@ public class TuitionLoanPage {
                 String wantsLoahn = INPUT.scanner.next().toLowerCase();
 
                 if (wantsLoahn.equals("y")) {
-                    // show owned cards
                     Card resualtcard = CARD_PAGE.show();
                     if (resualtcard != null) {
 
@@ -61,19 +60,7 @@ public class TuitionLoanPage {
 
                             //todo is it good idea to store hole student object??
 
-                            TuitionLaon tuitionLaon = new TuitionLaon();
-                            java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-
-
-                            tuitionLaon.setLoanDate(date);
-                            tuitionLaon.setAmount(allowedTuitionLoanAmount);
-                            tuitionLaon.setInterestRate(4);
-                            tuitionLaon.setStudent(student);
-                            tuitionLaon.setCard(resualtcard);
-                            tuitionLaon.setUpTutationLoan();
-                            tuitionLaon.setDegreeType(degreeType);
-                            tuitionLaon.setUpInstallments(AUTH_HOLDER);
-
+                            TuitionLaon tuitionLaon = setupLoan(allowedTuitionLoanAmount, student, resualtcard, degreeType);
 
 
                             TUITION_LOAN_SERVICE.save(tuitionLaon);
@@ -106,5 +93,21 @@ public class TuitionLoanPage {
                                "so you are not allowed to take this loan");
         }
 
+    }
+
+    private TuitionLaon setupLoan(BigDecimal allowedTuitionLoanAmount, Student student, Card resualtcard, DegreeType degreeType) {
+        TuitionLaon tuitionLaon = new TuitionLaon();
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+
+        tuitionLaon.setLoanDate(date);
+        tuitionLaon.setAmount(allowedTuitionLoanAmount);
+        tuitionLaon.setInterestRate(4);
+        tuitionLaon.setStudent(student);
+        tuitionLaon.setCard(resualtcard);
+        tuitionLaon.setUpTutationLoan();
+        tuitionLaon.setDegreeType(degreeType);
+        tuitionLaon.setUpInstallments(AUTH_HOLDER);
+        return tuitionLaon;
     }
 }

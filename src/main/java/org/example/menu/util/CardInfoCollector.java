@@ -54,10 +54,8 @@ public class CardInfoCollector {
             }
         }
 
-        // Convert LocalDate to java.sql.Date
         Date sqlExpirationDate = Date.valueOf(expirationDate);
 
-        // Output the collected information
 
         giveCard.setCardNummber(cardNumber);
         giveCard.setCvv2(ccv2);
@@ -78,7 +76,6 @@ public class CardInfoCollector {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
         sdf.setLenient(false);
         try {
-            // Parse the date and convert to LocalDate
             java.util.Date parsedDate = sdf.parse(dateInput);
             return new java.sql.Date(parsedDate.getTime()).toLocalDate();
         } catch (ParseException e) {
@@ -105,10 +102,10 @@ public class CardInfoCollector {
         while (true) {
             System.out.print("Please enter a number: ");
             if (scanner.hasNextInt()) {
-                return scanner.nextInt(); // return the valid integer
+                return scanner.nextInt();
             } else {
                 System.out.println("here you are allowed just give numbers nothing else. Please try again.");
-                scanner.next(); // discard the invalid input
+                scanner.next();
             }
         }
     }

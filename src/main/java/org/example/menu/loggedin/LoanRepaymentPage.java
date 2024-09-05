@@ -64,23 +64,10 @@ public class LoanRepaymentPage {
 
             }
 
-
-            //paid loans
-            paidLoans();
-
-            //unpaid loans
-            unpaidLoans();
-
-            //pay loans
-            payLoans();
-
-
         }
     }
 
     private void payLoans() {
-        //    PAYLOAN_PAGE.show();
-
         System.out.println(MESSAGE.getInputMessage("loan number you want ot pay off:"));
         List<LoanInstallment> unpaiedInstallments = INSTALLMENT_SERVICE.getInstallments(AUTHHOLDER.student, false);
 
@@ -142,7 +129,6 @@ public class LoanRepaymentPage {
             System.out.println(i + ") " + unpaiedInstallments.get(i).toString());
 
         }
-
     }
 
     private void paidLoans() {
@@ -151,7 +137,6 @@ public class LoanRepaymentPage {
 
         for (int i = 0; i < unpaiedInstallments.size(); i++) {
             System.out.println(i + ") " + unpaiedInstallments.get(i).toString());
-
         }
     }
 }

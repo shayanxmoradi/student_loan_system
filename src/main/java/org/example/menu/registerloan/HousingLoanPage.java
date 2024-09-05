@@ -3,7 +3,6 @@ package org.example.menu.registerloan;
 import org.example.entities.Card;
 import org.example.entities.Student;
 import org.example.entities.loan.HousingLoan;
-import org.example.entities.loan.StudyLoan;
 import org.example.menu.util.Input;
 import org.example.menu.util.Message;
 import org.example.services.card.CardService;
@@ -62,22 +61,7 @@ public class HousingLoanPage {
 
                                 //todo is it good idea to store hole student object??
 
-                                HousingLoan housingLoan = new HousingLoan();
-                                java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-
-
-                                housingLoan.setLoanDate(date);
-                                housingLoan.setAmount(AUTH_HOLDER.cityType.allowedHousingLoanAmount());
-                                housingLoan.setInterestRate(4);
-                                housingLoan.setStudent(student);
-                                housingLoan.setCard(resualtcard);
-                                housingLoan.setCityType(AUTH_HOLDER.cityType);
-                                housingLoan.setUpInstallments(AUTH_HOLDER);
-
-                                housingLoan.setPartnerStudent(HOUSINGLOAN_SERVICE.partnerStudetnt(AUTH_HOLDER.student));
-
-
-                                HOUSINGLOAN_SERVICE.save(housingLoan);
+                                setupLoan(student, resualtcard);
 
                                 System.out.println(MESSAGE.getSuccessfulMessage("taking your loan on this card "));
 
@@ -113,5 +97,24 @@ public class HousingLoanPage {
         } else {
             System.out.println("you are not Allowed for Housing loan cause you are not married!");
         }
+    }
+
+    private void setupLoan(Student student, Card resualtcard) {
+        HousingLoan housingLoan = new HousingLoan();
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+
+        housingLoan.setLoanDate(date);
+        housingLoan.setAmount(AUTH_HOLDER.cityType.allowedHousingLoanAmount());
+        housingLoan.setInterestRate(4);
+        housingLoan.setStudent(student);
+        housingLoan.setCard(resualtcard);
+        housingLoan.setCityType(AUTH_HOLDER.cityType);
+        housingLoan.setUpInstallments(AUTH_HOLDER);
+
+        housingLoan.setPartnerStudent(HOUSINGLOAN_SERVICE.partnerStudetnt(AUTH_HOLDER.student));
+
+
+        HOUSINGLOAN_SERVICE.save(housingLoan);
     }
 }
